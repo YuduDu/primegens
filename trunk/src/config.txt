@@ -1,0 +1,455 @@
+#
+#				PRIMEGENSv2
+#
+# INTRODUCTION
+#
+# PRIMEGENS 1.0 was written by Dong Xu. The updates in the version 2
+# onwards, including the graphical user interface, were developed 
+# by Gyan Prakash Srivastava and Muneendra Ojha. If you use PRIMEGENS 
+# in any publication, please refer to:
+# Gyan Prakash Srivastava and Dong Xu. "Genome-scale probe and primer 
+# design with PRIMEGENS". Methods Mol Biol. 2007: 402:159-76.
+# 
+#
+# COPYRIGHT / AVAILABILITY
+#
+# The program PRIMEGENS is copyrighted @ Digital Biology Laboratory, 
+# University of Missouri and is NOT in the public domain. PRIMEGENS 
+# is free of charge to academic users and can be downloaded from 
+# http://www.digbio.missouri.edu/primegens.
+# 
+# PRIMEGENS uses some results from two third-party programs, i.e., 
+# Primer3 developed by the Whitehead Institute for Biomedical 
+# Research and BLAST developed by National Center for Biotechnology 
+# Information (NCBI).
+# 
+# The authors of PRIMEGENS make no representations about the 
+# suitability of the software for any purpose. It is provided "as is" 
+# without express or implied warranty. The authors shall not be 
+# liable for any damages suffered by Licensee from the use of this 
+# software.
+#
+#
+# ACKNOWLEDGEMENT
+#
+# The development of PRIMEGENS was sponsored by Department of Energy, 
+# Department of Defense, and National Institute of Health. We like to 
+# thank collaborations and suggestions from our colleagues Ying Xu, 
+# Jizhong Zhou, Huidong Shi, Gary Stacey, Henry Nguyen & Trupti Joshi.
+#
+#
+# CITATION
+#
+# If you use PRIMEGENS in any publication, please refer to:
+# Gyan Prakash Srivastava and Dong Xu "Genome-Scale Probe and Primer 
+# Design with PRIMEGENS" Methods Mol Biol. 2007; 402:159-7617951795.
+#
+#
+# standard tags used in primer design
+# it will allow PRIMEGENS to recognize various input formats and 
+# parameters
+
+# AUTHORS
+#
+# 	- Gyan Prakash Srivastava
+#	- Mike Arkinson
+#	- Muneendra Ojha
+#	- Dong Xu
+# 
+#
+# ADDITIONAL REFERENCES
+#
+# Gyan Prakash Srivastava, Juyuan Guo, Huidong Shi and Dong Xu. 
+# "PRIMEGENS-v2: genome-wide primer design for analyzing DNA 
+# methylation pattern of CpG island" Bioinformatics 2008 24:1837-42.
+#
+# Dong Xu, Guangshan Li, Liyou Wu, Jizhong Zhou and Ying Xu. 
+# "PRIMEGENS: A Computer Program for Robust and Efficient Design of 
+# Gene-Specific Probes for Microarray Analysis". Bioinformatics. 
+# 18:1432-1437 2002.
+#
+#
+# INSTRUCTION
+#
+# select algorithm type for primer design. currenly four types of 
+# algorithm design is available that is PSPD, FSPD, GSPD and SSPD.
+#
+# SSPD(Sequence-Specific Primer Design) (default) 
+#	The algorithm is used to design primer for user input query
+#	sequences in FASTA format. It will design primer for each 
+#	sequenc and will check for hybridization for each pair.
+#
+# FSPD(Fragment-Specific Primer Design)
+#	The algorithm would generate the fragment for each of the long 
+#	query sequences based on fragment length (FSPD_LENGTH) and 
+#	inter-distance between two fragments(FSPD_PERIOD).  
+#
+# GSPD(Gene-Specific Primer Design) 
+#	The algorithm would use a list of input gene symbols to find 
+#	respective nucleotide sequences from the database and generate 
+#	primers. Algorithm assumes every gene symbols is present in 
+#	the database.
+#
+# PSPD(Probe-Specific Primer Design)
+#	The algorithm would first find the input unique fragment (probe) 
+#	for a sequence amongst its homologs using multiple sequence 
+#	alignment technique and generate primer for each sequence.
+
+#ALGORITHM_TYPE=1			#Sequnce-specific primer design
+#ALGORITHM_TYPE=2			#Fragment-specific primer design
+#ALGORITHM_TYPE=3			#Gene-specific primer design
+#ALGORITHM_TYPE=4			#Probe-specific primer design
+
+ALGORITHM_TYPE=1			#Sequnce-specific primer design
+
+##############-QUERY SEQUENCE INPUT FORMAT TYPE####################
+# This tag represents title of the input query sequence. Program 
+# would parse this title to fetch the coordinate of the sequence in 
+# case of chromosome type database. Title follows the following 
+# format chr22:10900-109500 "description" Incase parsing the title.
+
+#QUERY_FORMAT=1			#FASTA:gid
+#QUERY_FORMAT=2			#FASTA:gid,description
+#QUERY_FORMAT=3			#FASTA:chr,start,end
+#QUERY_FORMAT=4			#FASTA:chr,start,end,desciption
+
+QUERY_FORMAT=3			#FASTA:gid
+
+# This tag represents the presence/absence of nucleotide sequence 
+# in a query and must follow same rule for each of them. If 
+# nucleotide sequence is not present, program would either fetch 
+# the sequence from database or genome by parsing the sequence title. 
+
+#QUERY_SEQUENCE=0	#only query name present in query input
+#QUERY_SEQUENCE=1	#nucleotide sequence present in query input
+
+QUERY_SEQUENCE=1	#nucleotide sequence present in query input
+
+##############DATABASE TYPE#############################################
+# if database is in a single file, which contains multiple sequences,
+# whether small or large, the database is classified as a single database.
+
+# if database is genome of any species such that, each chromosome sequence
+# is contained in one file like downloaded human genome then database type 
+# is classified as chromosome type. 
+
+# if there are multiple database, each file contains multiple sequences in
+# FASTA format, then these database types are classified as multiple type.
+# To Use this option, user  to generate a file containg list of names for 
+# each database file.
+
+#DATABASE_TYPE=1			#single database file
+#DATABASE_TYPE=2			#multiple databases
+#DATABASE_TYPE=3			#chromosomal sequences of organism
+
+DATABASE_TYPE=1				#single database file
+
+####################PRIMEGENS CONFIGURATION##############################
+#Bisulfite mode primer design is for methylated type sequence primer design.
+#Value of 1 indicates bisulfite mode primer design. If a value of 1 is
+#entered then PRIMER_CG_MAX tag should have some value (default=0).
+#BISULFITE_MODE=0			#normal primer design
+#BISULFITE_MODE=1			#bisulfite mode primer design
+
+BISULFITE_MODE=0				#normal primer design
+
+# bisulfite primer design parameters
+# max no. of CG sites in either primer (ignored if BISULFITE_MODE=0)
+
+#PRIMER_CG_MAX=?			#valid only for bisulfite mode
+#PRIMER_CG_MAX=0			#no CG allowed in the primer pair
+#PRIMER_CG_MAX=2			#max no. of CG allowed in primer pair
+
+PRIMER_CG_MAX=?				#valid only for bisulfite mode
+
+############# PROBE ONLY DESIGN ALGORITHMS ######################## 
+#PROBE_DESIGN=0				#usual primer design
+#PROBE_DESIGN=1				#probe design only
+
+PROBE_DESIGN=0
+
+#GC content of the probes
+#PROBE_MAX_GC=70.0			#max. GC% in probe should be 70.0%
+#PROBE_MIN_GC=50.0			#min. GC% in probe should be 50.0%
+
+PROBE_MAX_GC=70.0			#max. GC% in probe should be 70.0%
+PROBE_MIN_GC=50.0			#min. GC% in probe should be 50.0%
+
+# max probe blast hit into consideration. This will control the 
+# specificity of designed probes. This count represent probe hit 
+# except its own.
+
+#PROBE_BLAST_HIT=2			#max. blast hit for any probe
+
+PROBE_BLAST_HIT=0			#max. blast hit for any probe
+
+# These parameters are used while generating probes for any 
+# partitioned query sequence. Using small value of PROBE_PERIOD 
+# would increase the runtime of the algorithm. Do not confuse it 
+# with the length of fragment of query sequence while partitioning 
+# it.
+
+#PROBE_LENGTH=160	#probe length should be 160 bases
+#PROBE_PERIOD=20	#overlap between any two probe = 20 bases
+
+PROBE_LENGTH=160	#probe length should be 160 bases
+PROBE_PERIOD=20		#overlap between any two probe = 20 bases
+
+# if the program does not find probe in a region, it will jump to 
+# next region.
+
+#PROBE_REGION=1000	#length of fragment of partioned query sequence
+
+PROBE_REGION=1000	#min. intra-probe distance
+
+# find only single probe per query sequence. if to find unique 
+# probes, then probe region is not considered.
+
+#PROBE_UNIQUE=0		#fragment-wise sequence probe design
+#PROBE_UNIQUE=1		#find a unique probe for each input query sequence
+
+PROBE_UNIQUE=0		#fragment-wise sequence probe design
+
+# The size/description during display can be controled from 
+# following values. 
+
+#DISPLAY_LEVEL=1		#used in JAVA based GUI execution window
+#DISPLAY_LEVEL=2		#used in command line execution 
+#DISPLAY_LEVEL=3		#detailed description of primer design
+#DISPLAY_LEVEL=4		#used for debugging problems during primer design
+
+DISPLAY_LEVEL=4			#used in command line execution 
+
+# Output the hybridization detail for only limited top hybridization. 
+# Rest all hybridization detail will not be printed
+HBRDN_DISPLAY_COUNT=0	#upto max. 4 only
+
+# Display only top given number of primer pairs, which is different that
+# total no. of primers analyzed during primer design.
+PRIMER_DISPLAY_COUNT=10     #show top 10 primer pairs only
+
+# additional parameters specifically used for fragment-specific 
+# primer design
+
+#FSPD_LENGTH=160		#query fragment to design associated primer pair
+#FSPD_PERIOD=20			#overlap between any two query fragment
+
+FSPD_LENGTH=160			#query fragment to design associated primer pair
+FSPD_OVERLAP=20			#overlap between any two query fragment
+
+# selecte query sequence fragment to include max. number of cut sites.
+#CUT_SITE_COUNT=3			#count of cut sites to consider
+#CUT_SITE=CCGC,GCGG,ACGT	#list of cut site nucleotides
+
+#CUT_SITE_COUNT=)				#count of cut sites to consider
+#CUT_SITE=CCGG,GCGC,CCGC,CGCG	#list of cut site nucleotides
+#CUT_SITE_REGION=100
+
+#total blast records
+CHRCOUNT=20	
+
+#total blast record
+BLASTRECORDS=20	
+
+#blast will run 24 times					  
+BLASTLOOP=5		 
+
+#database count in each blast loop
+CHRDBINLOOP=4		
+
+#smallest possible amplicon
+AMPSB=9999	
+
+#oligo size start from right
+MINBIND=15			
+
+#type of blast program used for hybridization check
+FORMATDB_PROGRAM=formatdb
+
+#BLAST_PROGRAM=blastall
+#BLAST_PROGRAM=bl2seq
+BLAST_PROGRAM=megablast
+#BLAST_PROGRAM=megablast.exe
+
+#right size oligo length to check hybridization
+WORDSIZE=11
+
+# type of primer design program used for primer design
+PRIMERDESIGN_PROGRAM=primer3_core
+#PRIMERDESIGN_PROGRAM=primer3.exe
+#PRIMERDESIGN_PROGRAM=muprimer.exe
+
+# type of alignment program used for multiple sequence alignment
+#ALIGNMENT_PROGRAM=clustalW
+#ALGINMENT_PROGRAM=bl2seq
+#ALIGNMENT_PROGRAM=blast
+#ALIGNMENT_PROGRAM=megablast
+#ALGINMENT_PROGRAM=self
+
+#LOGS=0
+LOGS=1
+
+#valid only for pspd primer design
+#DESIGN_PRIMER=1
+PSPD_DESIGN_PRIMER=1
+
+BLAST_OGP=4
+BLAST_OIP=2
+PSPD_EXPECT="1e-15"
+PSPD_MINFILTERLENGTH=50
+PSPD_RUN_SIM_FLAG=1
+PSPD_MAX_SIMILARITY=0.75
+PSPD_MINSEGLENGTH=100
+
+
+#______________PRIMER DESIGN PARAMETERS___________________________
+
+# primer design parameters used specifically by primer3
+
+# PRIMER_PRODUCT_SIZE_RANGE=150-170
+# The associated values specify the lengths of the product that 
+# the user wants the primers to create, and is a space separated 
+# list of elements of the form <x>-<y> where an <x>-<y> pair is 
+# a legal range of lengths for the product.  For example, if one 
+# wants PCR products to be between 100 to 150 bases (inclusive) 
+# then one would set this parameter to 100-150.  
+
+PRIMER_PRODUCT_SIZE_RANGE=150-250
+
+
+# PRIMER_EXPLAIN_FLAG=0 (boolean, default 0)
+# If this flag is non-0, produce PRIMER_LEFT_EXPLAIN, 
+# PRIMER_RIGHT_EXPLAIN, and PRIMER_INTERNAL_OLIGO_EXPLAIN output 
+# tags, which are intended to provide information on the number 
+# of oligos and primer pairs that primer3 examined, and statistics 
+# on the number discarded for various reasons.  If -format_output 
+# is set similar information is produced in the user-oriented output.
+
+PRIMER_EXPLAIN_FLAG=0
+
+
+# PRIMER_FILE_FLAG=0 (boolean, default 0)
+# If the associated value is non-0, then primer3 creates two output 
+# files for each input SEQUENCE. File <sequence_id>.for lists all 
+# acceptable left primers for <sequence_id>, and <sequence_id>.rev
+# lists all acceptable right primers for <sequence_id>, where 
+# <sequence_id> is the value of the PRIMER_SEQUENCE_ID tag (which 
+# must be supplied).  In addition, if the input tag 
+# PRIMER_PICK_INTERNAL_OLIGO is non-0, primer3 produces a file 
+# <sequence_id>.int, which lists all acceptable internal oligos.
+
+PRIMER_FILE_FLAG=0
+
+
+# PRIMER_NUM_RETURN=5 (int, default 5)
+# The maximum number of primer pairs to return.  Primer pairs 
+# returned are sorted by their "quality", in other words by the 
+# value of the objective function (where a lower number indicates 
+# a better primer pair).  Caution: setting this parameter to a 
+# large value will increase running time.
+
+PRIMER_NUM_RETURN=25
+
+
+# PRIMER_MAX_POLY_X (int, default 5)
+# The maximum allowable length of a mononucleotide repeat, 
+# for example AAAAAA.
+
+PRIMER_MAX_POLY_X=0
+
+
+#primer3-parameter
+
+PRIMER_INTERNAL_OLIGO_MAX_POLY_X=0
+
+
+# PRIMER_MIN_TM (float, default 57.0C)
+# Minimum acceptable melting temperature(Celsius) for a primer oligo.
+
+PRIMER_MIN_TM=56.0
+
+
+# PRIMER_OPT_TM (float, default 60.0C)
+# Optimum melting temperature(Celsius) for a primer oligo. 
+# Primer3 will try to pick primers with melting temperatures are 
+# close to this temperature.  The oligo melting temperature 
+# formula used can be specified by user. Please see 
+# PRIMER_TM_SANTALUCIA for more information.
+
+PRIMER_OPT_TM=60.0
+
+
+# PRIMER_MAX_TM (float, default 63.0C)
+# Maximum acceptable melting temperature(Celsius) for a primer oligo.
+
+PRIMER_MAX_TM=66.0
+
+
+# PRIMER_OPT_SIZE (int, default 20)
+# Optimum length (in bases) of a primer oligo. Primer3 will 
+# attempt to pick primers close to this length.
+
+PRIMER_OPT_SIZE=20
+
+
+# PRIMER_MIN_SIZE (int, default 18)
+# Minimum acceptable length of a primer.  Must be greater than 0 
+# and less than or equal to PRIMER_MAX_SIZE.
+
+PRIMER_MIN_SIZE=19
+
+
+# PRIMER_MAX_SIZE (int, default 27)
+# Maximum acceptable length (in bases) of a primer.  Currently 
+# this parameter cannot be larger than 35. This limit is governed 
+# by maximum oligo size for which primer3's melting-temperature 
+# is valid.
+
+PRIMER_MAX_SIZE=23
+
+
+# PRIMER_MAX_GC (float, default 80.0%)
+# Maximum allowable percentage of Gs and Cs in any primer 
+# generated by Primer.
+
+PRIMER_MAX_GC=60
+
+
+# PRIMER_MIN_GC (float, default 20.0%)
+# Minimum allowable percentage of Gs and Cs in any primer.
+
+PRIMER_MIN_GC=40
+
+
+# PRIMER_SELF_END (decimal 9999.99, default 3.00)
+# The maximum allowable 3'-anchored global alignment score 
+# when testing a single primer for self-complementarity, and the 
+# maximum allowable 3'-anchored global alignment score when 
+# testing for complementarity between left and right primers.  
+# The 3'-anchored global alignment score is taken to predict the 
+# likelihood of PCR-priming primer-dimers.
+
+PRIMER_SELF_END=3
+
+
+# PRIMER_SELF_ANY (decimal,9999.99, default 8.00)
+# The maximum allowable local alignment score when testing a single 
+# primer for (local) self-complementarity and the maximum allowable 
+# local alignment score when testing for complementarity between 
+# left and right primers.  Local self-complementarity is taken to 
+# predict the tendency of primers to anneal to each other 
+# without necessarily causing self-priming in the PCR.  The scoring 
+# system gives 1.00 for complementary bases, -0.25 for a match of 
+# any base (or N) with an N, -1.00 for a mismatch, and -2.00 for a 
+# gap. Only single-base-pair gaps are allowed.
+
+PRIMER_SELF_ANY=8
+
+
+# PRIMER_MAX_END_STABILITY (float 999.9999, default 100.0)
+# The maximum stability for the last five 3' bases of a left or right 
+# primer.  Bigger numbers mean more stable 3' ends.  
+
+PRIMER_MAX_END_STABILITY=100.0
+
+

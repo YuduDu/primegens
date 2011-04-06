@@ -1,0 +1,195 @@
+
+# copyrght@Digital Biology Laboratory
+# Author@ Gyan Prakash Srivastava
+
+# standard tags used in primer design
+# it will allow PRIMEGENS to recognize various input formats and parameters
+
+
+################-QUERY SEQUENCE INPUT FORMAT TYPE######################
+#QUERY_FORMAT=0			#FASTA:chr,start,end,desciption
+#QUERY_FORMAT=1			#FASTA:chr,start,end
+#QUERY_FORMAT=2			#FASTA:gid,description
+QUERY_FORMAT=3			#FASTA:gid
+
+#to check if the sequence is available in the query input file or not
+#QUERY_SEQUENCE=no		#only query name present in query input
+QUERY_SEQUENCE=1		#nucleotide sequence present in query input
+
+
+##############DATABASE TYPE#############################################
+#if database is in a single file, which contains multiple sequences,
+#whether small or large, the database is classified as a single database.
+
+#if database is genome of any species such that, each chromosome sequence
+#is contained in one file like downloaded human genome with each file for
+#each chromosome, then database type is classified as chromosome type. 
+
+#if there are multiple database, each file contains multiple sequences in
+#FASTA format, then these database types are classified as multiple type. 
+
+DATABASE_TYPE=0				#single database file
+#DATABASE_TYPE=1			#multiple databases
+#DATABASE_TYPE=2			#chromosome genome of organism
+
+####################PRIMEGENS CONFIGURATION##############################
+#bisulfite primer design parameters
+#max no. of CG sites in either primer
+PRIMER_CG_MAX=?
+#PRIMER_CG_MAX=2
+
+#probe design
+PROBE_DESIGN=0
+#GC content of the probes
+PROBE_MAX_GC=70.0
+PROBE_MIN_GC=50.0
+#max probe blast hit into consideration
+PROBE_BLAST_HIT=2
+#probe length and probe period while fragementing query sequence
+PROBE_LENGTH=160
+PROBE_PERIOD=20
+#if the program find probe in a region, it will jum to next region
+PROBE_REGION=1000
+#find only single probe per query sequence
+#if to find unique probes, then probe region is not considered
+PROBE_UNIQUE=1
+
+#select algorithm type for primer design. currenly four types of algorithm 
+#design is available that is PSPD, FSPD, GSPD and SSPD.
+
+#ALGORITHM_TYPE=0			#FSPD
+#ALGORITHM_TYPE=1			#PSPD
+ALGORITHM_TYPE=2			#SSPD
+#ALGORITHM_TYPE=3			#GSPD
+
+#different display levels 
+#DISPLAY_LEVEL=0
+#DISPLAY_LEVEL=1
+#DISPLAY_LEVEL=2
+DISPLAY_LEVEL=3
+
+
+#additional parameters specifically for fragment-specific primer design
+FSPD_LENGTH=160
+FSPD_PERIOD=20
+
+#selecte query sequence fragment to include cut sites
+CUT_SITE_COUNT=3
+CUT_SITE=CCGC,GCGG,ACGT
+
+#total blast records
+CHRCOUNT=48	
+
+#total blast record
+BLASTRECORDS=48	
+
+#blast will run 24 times					  
+BLASTLOOP=12		 
+
+#database count in each blast loop
+CHRDBINLOOP=4		
+
+#smallest possible amplicon
+AMPSB=500	
+
+#oligo size start from right
+MINBIND=18			
+
+#type of blast program used for hybridization check
+FORMATDB_PROGRAM=formatdb
+#BLAST_PROGRAM=blastall
+#BLAST_PROGRAM=bl2seq
+BLAST_PROGRAM=megablast
+#BLAST_PROGRAM=megablast.exe
+
+#right size oligo length to check hybridization
+WORDSIZE=18
+
+#type of primer design program used for primer design
+PRIMERDESIGN_PROGRAM=primer3_core
+#PRIMERDESIGN_PROGRAM=primer3.exe
+#PRIMERDESIGN_PROGRAM=muprimer.exe
+
+#type of alignment program used for multiple sequence alignment
+#ALIGNMENT_PROGRAM=clustalW
+#ALGINMENT_PROGRAM=bl2seq
+#ALIGNMENT_PROGRAM=blast
+#ALIGNMENT_PROGRAM=megablast
+#ALGINMENT_PROGRAM=self
+
+#LOGS=0
+LOGS=1
+
+#valid only for pspd primer design
+#DESIGN_PRIMER=1
+DESIGN_PRIMER=1
+
+BLAST_OGP=4
+BLAST_OIP=2
+PSPD_EXPECT="1e-15"
+PSPD_MINFILTERLENGTH=50
+RUN_SIM_FLAG=1
+MAX_SIMILARITY=0.75
+MINSEGLENGTH=100
+
+#probe design
+#MIN_PROBE_LENGTH=150
+#MAX_PROBE_LENGTH=170
+
+#################PRIMER DESIGN PARAMETERS##########################
+#primer design parameters used specifically by primer3
+#primer3-parameter
+PRIMER_PRODUCT_SIZE_RANGE=150-170
+
+#primer3-parameter
+PRIMER_EXPLAIN_FLAG=0
+
+#primer3-parameter
+PRIMER_FILE_FLAG=0
+
+#primer3-parameter
+#number of primer pairs design in one run by primer3
+PRIMER_NUM_RETURN=25
+
+#primer3-parameter
+PRIMER_MAX_POLY_X=0
+
+#primer3-parameter
+PRIMER_INTERNAL_OLIGO_MAX_POLY_X=0
+
+#primer3-parameter
+PRIMER_MIN_TM=56.0
+
+#primer3-parameter
+PRIMER_OPT_TM=60.0
+
+#primer3-parameter
+PRIMER_MAX_TM=66.0
+
+#primer3-parameter
+PRIMER_MIN_SIZE=19
+
+#primer3-parameter
+PRIMER_OPT_SIZE=20
+
+#primer3-parameter
+PRIMER_MAX_SIZE=23
+
+#primer3-parameter
+PRIMER_MAX_GC=60
+
+#primer3-parameter
+PRIMER_MIN_GC=40
+
+#primer3-parameter
+#PRIMER_SELF_END=100
+PRIMER_SELF_END=3
+
+#primer3-parameter
+#PRIMER_SELF_ANY=100
+PRIMER_SELF_ANY=8
+
+#primer3-parameter
+PRIMER_MAX_END_STABILITY=100.0
+
+
