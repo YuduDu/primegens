@@ -155,12 +155,11 @@ void p_oligo_strcpy(char *str1, char *str2) {
 	}
 	/* copy only the last MINBIND nucleotides */
 	str1[MINBIND] = 0;	/*important*/
-	//printf("str2=[%s]\tstrlen=%d\n", str2, len);
 	for(i=MINBIND-1; i >= 0; i--) {
 		ndx = len - MINBIND +i;
 		str1[i] = str2[ndx];
 	}
-	//printf("str1=[%s]\tstrlen=%d\n", str1,strlen(str1));
+
 	return;
 }
 
@@ -494,10 +493,8 @@ for(i=(p_rseq_len-6);i<p_rseq_len;i++){
         (h_check_lseq[4] == 'K') || (h_check_lseq[4] == 'L') || (h_check_lseq[4] == 'M') || \
         (h_check_lseq[4] == 'V') || (h_check_lseq[4] == 'O') || (h_check_lseq[4] == 'P') || \
         (h_check_lseq[4] == 'Q') || (h_check_lseq[4] == 'R') || (h_check_lseq[4] == 'S'))){
-       //printf("lseq ignored for last 2!\n");
        *potl=0;
        return PASS;
-       //return 0;
     }
     if(((h_check_rseq[0] == 'H') || (h_check_rseq[0] == 'I') || (h_check_rseq[0] == 'J') || \
         (h_check_rseq[0] == 'K') || (h_check_rseq[0] == 'L') || (h_check_rseq[0] == 'M') || \
@@ -507,10 +504,8 @@ for(i=(p_rseq_len-6);i<p_rseq_len;i++){
         (h_check_rseq[1] == 'K') || (h_check_rseq[1] == 'L') || (h_check_rseq[1] == 'M') || \
         (h_check_rseq[1] == 'V') || (h_check_rseq[1] == 'O') || (h_check_rseq[1] == 'P') || \
         (h_check_rseq[1] == 'Q') || (h_check_rseq[1] == 'R') || (h_check_rseq[1] == 'S'))){
-      //printf("rseq ignored for first 2!\n");
        *potl=0;
        return PASS;
-       //return 0;
     }
 
     if(((h_check_lseq[1] == 'H') || (h_check_lseq[1] == 'I') || (h_check_lseq[1] == 'J') || \
@@ -525,10 +520,8 @@ for(i=(p_rseq_len-6);i<p_rseq_len;i++){
         (h_check_lseq[3] == 'K') || (h_check_lseq[3] == 'L') || (h_check_lseq[3] == 'M') || \
         (h_check_lseq[3] == 'V') || (h_check_lseq[3] == 'O') || (h_check_lseq[3] == 'P') || \
         (h_check_lseq[3] == 'Q') || (h_check_lseq[3] == 'R') || (h_check_lseq[3] == 'S'))){
-       //printf("lseq ignored for last 3!\n");
        *potl=0;
        return PASS;
-       //return 0;
     }
     if(((h_check_rseq[2] == 'H') || (h_check_rseq[2] == 'I') || (h_check_rseq[2] == 'J') || \
         (h_check_rseq[2] == 'K') || (h_check_rseq[2] == 'L') || (h_check_rseq[2] == 'M') || \
@@ -542,10 +535,8 @@ for(i=(p_rseq_len-6);i<p_rseq_len;i++){
         (h_check_rseq[4] == 'K') || (h_check_rseq[4] == 'L') || (h_check_rseq[4] == 'M') || \
         (h_check_rseq[4] == 'V') || (h_check_rseq[4] == 'O') || (h_check_rseq[4] == 'P') || \
         (h_check_rseq[4] == 'Q') || (h_check_rseq[4] == 'R') || (h_check_rseq[4] == 'S'))){
-       //printf("rseq ignored for 3!\n");
        *potl=0;
        return PASS;
-       //return 0;
     }
 
     if((((h_check_lseq[2] == 'H') || (h_check_lseq[2] == 'I') || (h_check_lseq[2] == 'J') || \
@@ -572,10 +563,8 @@ for(i=(p_rseq_len-6);i<p_rseq_len;i++){
          (h_check_lseq[1] == 'K') || (h_check_lseq[1] == 'L') || (h_check_lseq[1] == 'M') || \
          (h_check_lseq[1] == 'N') || (h_check_lseq[1] == 'O') || (h_check_lseq[1] == 'P') || \
          (h_check_lseq[1] == 'Q') || (h_check_lseq[1] == 'R') || (h_check_lseq[1] == 'S')))){
-       //printf("lseq ignored for adjacent mismatch!\n");
        *potl=0;
        return PASS;
-       //return 0;
     }
     if((((h_check_rseq[2] == 'H') || (h_check_rseq[2] == 'I') || (h_check_rseq[2] == 'J') || \
          (h_check_rseq[2] == 'K') || (h_check_rseq[2] == 'L') || (h_check_rseq[2] == 'M') || \
@@ -601,26 +590,24 @@ for(i=(p_rseq_len-6);i<p_rseq_len;i++){
          (h_check_lseq[4] == 'K') || (h_check_lseq[4] == 'L') || (h_check_lseq[4] == 'M') || \
          (h_check_lseq[4] == 'N') || (h_check_lseq[4] == 'O') || (h_check_lseq[4] == 'P') || \
          (h_check_lseq[4] == 'Q') || (h_check_lseq[4] == 'R') || (h_check_lseq[4] == 'S')))){
-       //printf("rseq ignored for adjacent mismatch!\n");
        *potl=0;
        return PASS;
-       //return 0;
     }
-float l,r;
-int PTS=1;
+	float l,r;
+	int PTS=1;
 	/* Calculate the binding energies */
-    l = oligodg(h_check_lseq,PTS);
-    r = oligodg(h_check_rseq,PTS);
+   l = oligodg(h_check_lseq,PTS);
+   r = oligodg(h_check_rseq,PTS);
     
-    /* If the energies are both less than Primer Max End Stability, then there is potential */
-    if((l<PMES) && (r<PMES))
-    {
-       *potl =1;
-    }
-else{
-*potl=0;
-}
-return PASS;
+   /* If the energies are both less than Primer Max End Stability, then there is potential */
+   if((l<PMES) && (r<PMES))
+   {
+      *potl =1;
+   }
+	else{
+		*potl=0;
+	}
+	return PASS;
 }
 
 
@@ -745,7 +732,6 @@ short get_hybd_from_chromosome(char *qid, int ls, int le, int rs, int re, char *
                 tok1 = strtok(chr,". _|\0");  /*find first name of file*/
 
                 if(strcmp(tok1, tok)==0) {
-                        //printf("c=%s\n",chr);
                         #ifdef _WIN32
                                 sprintf(tdbname, "%s\\%s", dbpath, fn_db[d].fn);
                         #else
@@ -848,8 +834,6 @@ short get_hybd_from_chromosome(char *qid, int ls, int le, int rs, int re, char *
                         int hrlen = (int)strlen(hrseq);
 
                         fclose(fp);
-//printf("left: %s\nright: %s\n",hlseq,hrseq);
-
                         break;
                 }
         }
@@ -896,7 +880,6 @@ short read_query_toget_format(char *fn) {
 				qf2++;	
 		}
 		if(strncmp(line, ">chr", 4)==0) {
-			//printf("madar\n"); getchar();
 			strcpy(line1, line);
 			tok = strtok(line1, ": #\t\n");
 			tok = strtok(NULL,  "- #\t\n");
@@ -999,5 +982,3 @@ short read_query_toget_format(char *fn) {
 	fclose(fp);
 	return PASS;
 }
-
-
