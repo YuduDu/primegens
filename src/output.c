@@ -139,6 +139,7 @@ if (CUT_SITE_COUNT==0){
 				fprintf(fout3, "hbrdn %4d\n", ppair[pp].hbrdn_count);
 			else {
 				fprintf(fout3, "hbrdn %4d\t", ppair[pp].hbrdn_count);
+				/* REMOVE? */
 				//for(h=0; h < p_min(ppair[pp].hbrdn_count, HBRDN_DISPLAY_COUNT); h++)
 				for(h=0; h < ppair[pp].hbrdn_count; h++)
 					fprintf(fout3, "%s;", ppair[pp].hbrdn[h].id);

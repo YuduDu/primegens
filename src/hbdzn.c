@@ -11,10 +11,10 @@
 /* check the hybridizations for a query against a single database */
 int chk_hybridization_single(int q_ndx) {
 	int pp=0;							/*primer pair index*/
-	int c=0;							/*chromosome index*/
-	int p=0;							/*plus-plus hit index*/
-	int m=0;							/*plus-minus hit index*/
-	int p_p=0, p_m=0, best=0;			/*temporary buffer*/
+	int c=0;								/*chromosome index*/
+	int p=0;								/*plus-plus hit index*/
+	int m=0;								/*plus-minus hit index*/
+	int p_p=0, p_m=0, best=0;		/*temporary buffer*/
 	int left=0, right=0;
 	int ampl=0;							/*amplicon index*/
 	size_t t_size;
@@ -122,21 +122,22 @@ int chk_hybridization_single(int q_ndx) {
 
 /* check the hybridizations for a query against chromosomes */
 int chk_hybridization_chromosome(int q) {			/*index for qinfo*/
-	int pp=0;							/*primer pair index*/
-	int c=0;							/*chromosome index*/
-	int p=0;							/*plus-plus hit index*/
-	int m=0;                                /*plus-minus hit index*/		
+	int pp=0;												/*primer pair index*/
+	int c=0;													/*chromosome index*/
+	int p=0;													/*plus-plus hit index*/
+	int m=0;                                		/*plus-minus hit index*/		
         int r1=0, r2=0;					
-	int p_p=0, p_m=0, best=0;			/*temporary buffer*/
+	int p_p=0, p_m=0, best=0;							/*temporary buffer*/
 	int left=0, right=0;
-	int ampl=0;							/*amplicon index*/
+	int ampl=0;												/*amplicon index*/
 	size_t t_size;
 	char cid[BISULCHR];
 
 	printf("%s find all hybridization for ppair...\n",T_S());
 	/* for each primer pair */
 	for(pp=0; pp < ppair_count; pp++) {
-		//printf("processing primer pair # %d\n", pp+1);
+		if (dlevel > 3)
+			printf("processing primer pair # %d\n", pp+1);
 		ppair[pp].hbrdn_count = 0;
 		/* count the potential hybridizations */
 		for(c=0; c < BLASTRECORDS; c++) {
@@ -225,4 +226,3 @@ int chk_hybridization_chromosome(int q) {			/*index for qinfo*/
 	printf("%s find all hybridization for ppair...done!\n",T_S());
 	return PASS;
 }
-

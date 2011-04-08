@@ -41,14 +41,12 @@ int SeqMapping (char * tseq, char * qseq, int * seqmapping,
 		insertmatrix[0][0] = 0.0; 
 		deletematrix[0][0] = 0.0;   
 		for (ndx1 = 1; ndx1 <= tlength; ndx1++)					
-		//matrix[i][0] = initializing
 		{
 			scorematrix[ndx1][0]  = OpenGapPenalty + ndx1 * OneIndelPenalty;
 			insertmatrix[ndx1][0] = OpenGapPenalty + ndx1 * OneIndelPenalty;
 			deletematrix[ndx1][0] = LargeScore;
 		}   
 		for (ndx1 = 1; ndx1 <= qlength; ndx1++)					
-		//matrix[0][i] = initializing		
 		{ 
 			scorematrix[0][ndx1]  = OpenGapPenalty + ndx1 * OneIndelPenalty; 
 			deletematrix[0][ndx1] = OpenGapPenalty + ndx1 * OneIndelPenalty;
@@ -231,44 +229,45 @@ void ExtractAlignment (char * tseq, char * qseq, int ** scorematrix,
 
 /* construct a 2D similarity matrix for tseq onto qseq */
 void ConstructSim (char * tseq, char * qseq, int * seqmapping, int * inversemapping, int length, short ** similarity)
-  {
-     register int ndx, ndx1, ndx2, ndx0, s_type, t_type;
-     int base_shift = 0, shift = 0, sim, size;
+{
+	register int ndx, ndx1, ndx2, ndx0, s_type, t_type;
+	int base_shift = 0, shift = 0, sim, size;
 		
-		/* let shift be the last valid index in seqmapping */
-     for (ndx = length - 1; ndx > 0; ndx--)
-     {
-       if (seqmapping[ndx] != INVALID)
-       { shift = ndx; break; }
-     }
+	/* let shift be the last valid index in seqmapping */
+	for (ndx = length - 1; ndx > 0; ndx--)
+	{
+		if (seqmapping[ndx] != INVALID){
+			shift = ndx; 
+			break; 
+		}
+	}
 
 		
-     for (ndx0 = 0; ndx0 < length - PSPD_MINSEGLENGTH; ndx0++)
-     { 
-       sim = 0;
-       for (ndx = ndx0; ndx < length; ndx++)
-       { 
+	for (ndx0 = 0; ndx0 < length - PSPD_MINSEGLENGTH; ndx0++)
+	{ 
+		sim = 0;
+		for (ndx = ndx0; ndx < length; ndx++)
+		{ 
          ndx1 = ndx + base_shift;
 
-         if (seqmapping[ndx] != INVALID && 
-             qseq[ndx] == tseq[seqmapping[ndx]])
-           sim++;
+         if (seqmapping[ndx] != INVALID && qseq[ndx] == tseq[seqmapping[ndx]])
+				sim++;
 
-         ndx2 = seqmapping[ndx]+1;
+			ndx2 = seqmapping[ndx]+1;
 			
-			
-         while (ndx < shift && inversemapping[ndx2] == INVALID)
+			while (ndx < shift && inversemapping[ndx2] == INVALID)
          {
-           ndx1++;
-           ndx2++;
-           base_shift++;
-         }
-         size = ndx1 - ndx0 + 1;
+				ndx1++;
+				ndx2++;
+				base_shift++;
+			}
+			size = ndx1 - ndx0 + 1;
          /* update the similarity only if the subsequence is big enough */
          /* and not too similar */
-         if(ndx-ndx0+1 >= PSPD_MINSEGLENGTH && (float)sim/(float)size<PSPD_MAX_SIMILARITY)
-           similarity[ndx0][ndx]++;
-// printf ("ndx0=%d, ndx1=%d, size=%d, sim=%d\n", ndx0, ndx1, size, sim);
+			if(ndx-ndx0+1 >= PSPD_MINSEGLENGTH && (float)sim/(float)size<PSPD_MAX_SIMILARITY)
+				similarity[ndx0][ndx]++;
+			if (dlevel > 3)
+				printf ("ndx0=%d, ndx1=%d, size=%d, sim=%d\n", ndx0, ndx1, size, sim);
        }
      }
   }
