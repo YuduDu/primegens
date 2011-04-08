@@ -706,140 +706,138 @@ short get_nseq_from_chromosome(int q) {
 
 /*get sequence for given query from genome*/
 short get_hybd_from_chromosome(char *qid, int ls, int le, int rs, int re, char *chr, char *hlseq, char *hrseq) {
-        FILE *fp;
-        int flag=0, len=0, b=0, count=0;
-        int tstart=0, tend=0;
-        char line[MLINE], base, tdbname[FILENAME];
-        char tid[SEQUENCEID], *tok,*tok1;
-        short d=0;
-        char hl[30],hr[30];
-  *hlseq = '\0';
-        *hrseq = '\0';
+	FILE *fp;
+	int flag=0, len=0, b=0, count=0;
+	int tstart=0, tend=0;
+	char line[MLINE], base, tdbname[FILENAME];
+	char tid[SEQUENCEID], *tok,*tok1;
+	short d=0;
+	char hl[30],hr[30];
+	*hlseq = '\0';
+	*hrseq = '\0';
 
-			/* Get the start and end of the left sequence, reversing if backwards */
-        if(le < ls) {
-                tstart = ls-14;
-                tend = ls;
-        }
-        else {
-                tstart = ls;
-                tend = ls+14;
-        }
-			/* find the database file we want */
-        for(d=0; d < db_count; d++) {
-                strcpy(tdbname, fn_db[d].fn);
-                tok = strtok(tdbname,". _|\0");  /*find first name of file*/
-                tok1 = strtok(chr,". _|\0");  /*find first name of file*/
+	/* Get the start and end of the left sequence, reversing if backwards */
+	if(le < ls) {
+		tstart = ls-14;
+		tend = ls;
+	}
+	else {
+		tstart = ls;
+		tend = ls+14;
+	}
+	/* find the database file we want */
+	for(d=0; d < db_count; d++) {
+		strcpy(tdbname, fn_db[d].fn);
+		tok = strtok(tdbname,". _|\0");  /*find first name of file*/
+		tok1 = strtok(chr,". _|\0");  /*find first name of file*/
 
-                if(strcmp(tok1, tok)==0) {
-                        #ifdef _WIN32
-                                sprintf(tdbname, "%s\\%s", dbpath, fn_db[d].fn);
-                        #else
-                                sprintf(tdbname, "%s/%s", dbpath, fn_db[d].fn);
-                        #endif
-                        if(dlevel==4)
-                                printf("%s retrieve nseq from %s...\n", T_S(), tdbname);
-                        fp = p_fopen_error_exit(tdbname, "r");
-                        fgets(line, MLINE, fp); /*first line is identifier*/
-                        count=0;
-                        /* Read lines until we hit the starting line */
-                        while((count + CHR_FASTA_LINE)< tstart){
-                                fgets(line, MLINE, fp);
-                                count += CHR_FASTA_LINE;
-                        }
-                        /* Read Bases until we hit the starting base */
-                        for(b=count+1; b < ls; b++){
-                                fscanf(fp,"%c", &base);
-                        }
-                        /* If forward, copy normally */
-                        if(ls < le) {
-                                for(b=tstart; b <= tend;) {
-                                        fscanf(fp,"%c", &base);
-                                        if(base != '\n'){
-                                                hl[b-tstart] = toupper(base);
-                                                b++;
-                                        }
-                                }
-                        /* Otherwise, read in backwards and swap bases */
-                        } else {
-                                for(b=tstart; b <= tend;) {
-                                        fscanf(fp,"%c", &base);
-                                        if(base != '\n'){
-                                                if(toupper(base)=='A')
-                                                        hl[(tend-tstart)-(-b-tstart)] = 'T';
-                                                if(toupper(base)=='T')
-                                                        hl[(tend-tstart)-(-b-tstart)] = 'A';
-                                                if(toupper(base)=='G')
-                                                        hl[(tend-tstart)-(-b-tstart)] = 'C';
-                                                if(toupper(base)=='C')
-                                                        hl[(tend-tstart)-(-b-tstart)] = 'G';
-                                                b++;
-                                        }
-                                }
-                        }
-                        strcpy(hlseq,hl);
-                        strcat(hlseq,"\0");
-                        rewind(fp);
+		if(strcmp(tok1, tok)==0) {
+		#ifdef _WIN32
+			sprintf(tdbname, "%s\\%s", dbpath, fn_db[d].fn);
+		#else
+			sprintf(tdbname, "%s/%s", dbpath, fn_db[d].fn);
+		#endif
+			if(dlevel==4)
+				printf("%s retrieve nseq from %s...\n", T_S(), tdbname);
+			fp = p_fopen_error_exit(tdbname, "r");
+			fgets(line, MLINE, fp); /*first line is identifier*/
+			count=0;
+			/* Read lines until we hit the starting line */
+			while((count + CHR_FASTA_LINE)< tstart){
+				fgets(line, MLINE, fp);
+				count += CHR_FASTA_LINE;
+			}
+			/* Read Bases until we hit the starting base */
+			for(b=count+1; b < ls; b++){
+				fscanf(fp,"%c", &base);
+			}
+			/* If forward, copy normally */
+			if(ls < le) {
+				for(b=tstart; b <= tend;) {
+					fscanf(fp,"%c", &base);
+					if(base != '\n'){
+						hl[b-tstart] = toupper(base);
+						b++;
+					}
+				}
+			/* Otherwise, read in backwards and swap bases */
+			} else {
+				for(b=tstart; b <= tend;) {
+					fscanf(fp,"%c", &base);
+					if(base != '\n'){
+						if(toupper(base)=='A')
+							hl[(tend-tstart)-(-b-tstart)] = 'T';
+						if(toupper(base)=='T')
+							hl[(tend-tstart)-(-b-tstart)] = 'A';
+						if(toupper(base)=='G')
+							hl[(tend-tstart)-(-b-tstart)] = 'C';
+						if(toupper(base)=='C')
+							hl[(tend-tstart)-(-b-tstart)] = 'G';
+						b++;
+					}
+				}
+			}
+			strcpy(hlseq,hl);
+			strcat(hlseq,"\0");
+			rewind(fp);
 
-                        /* Get the start and end of the right sequence, reversing if backwards */
-                        if(re < rs) {
-                           tstart = rs-14;
-                           tend = rs;
-                        }
-                        else {
-                           tstart = rs;
-                           tend = rs+14;
-                        }
+			/* Get the start and end of the right sequence, reversing if backwards */
+			if(re < rs) {
+				tstart = rs-14;
+				tend = rs;
+			}
+			else {
+				tstart = rs;
+				tend = rs+14;
+			}
 
-                        count=0;
-                        /* Read lines until we hit the starting line */
-                        while((count + CHR_FASTA_LINE)< tstart){
-                                fgets(line, MLINE, fp);
-                                count += CHR_FASTA_LINE;
-                        }
-                        /* Read Bases until we hit the starting base */
-                        for(b=count+1; b < rs; b++){
-                                fscanf(fp,"%c", &base);
-                        }
-                        /* If forward, copy normally */
-                        if(ls < le) {
-                                for(b=tstart; b <= tend;) {
-                                        fscanf(fp,"%c", &base);
-                                        if(base != '\n'){
-                                                hr[b-tstart] = toupper(base);
-                                                b++;
-                                        }
-                                }
-                        /* Otherwise, read in backwards and swap bases */
-                        } else {
-                                for(b=tstart; b <= tend;) {
-                                        fscanf(fp,"%c", &base);
-                                        if(base != '\n'){
-                                                if(toupper(base)=='A')
-                                                        hr[(tend-tstart)-(-b-tstart)] = 'T';
-                                                if(toupper(base)=='T')
-                                                        hr[(tend-tstart)-(-b-tstart)] = 'A';
-                                                if(toupper(base)=='G')
-                                                        hr[(tend-tstart)-(-b-tstart)] = 'C';
-                                                if(toupper(base)=='C')
-                                                        hr[(tend-tstart)-(-b-tstart)] = 'G';
-                                                b++;
-                                        }
-                                }
-                        }
-                        strcpy(hrseq,hr);
-                        strcat(hrseq,"\0");
+			count=0;
+			/* Read lines until we hit the starting line */
+			while((count + CHR_FASTA_LINE)< tstart){
+				fgets(line, MLINE, fp);
+				count += CHR_FASTA_LINE;
+			}
+			/* Read Bases until we hit the starting base */
+			for(b=count+1; b < rs; b++){
+				fscanf(fp,"%c", &base);
+			}
+			/* If forward, copy normally */
+			if(ls < le) {
+				for(b=tstart; b <= tend;) {
+					fscanf(fp,"%c", &base);
+					if(base != '\n'){
+						hr[b-tstart] = toupper(base);
+						b++;
+					}
+				}
+			/* Otherwise, read in backwards and swap bases */
+			} else {
+				for(b=tstart; b <= tend;) {
+					fscanf(fp,"%c", &base);
+					if(base != '\n'){
+						if(toupper(base)=='A')
+							hr[(tend-tstart)-(-b-tstart)] = 'T';
+						if(toupper(base)=='T')
+							hr[(tend-tstart)-(-b-tstart)] = 'A';
+						if(toupper(base)=='G')
+							hr[(tend-tstart)-(-b-tstart)] = 'C';
+						if(toupper(base)=='C')
+							hr[(tend-tstart)-(-b-tstart)] = 'G';
+						b++;
+					}
+				}
+			}
+			strcpy(hrseq,hr);
+			strcat(hrseq,"\0");
 
-                        int hllen = (int)strlen(hlseq);
-                        int hrlen = (int)strlen(hrseq);
+			int hllen = (int)strlen(hlseq);
+			int hrlen = (int)strlen(hrseq);
 
-                        fclose(fp);
-                        break;
-                }
-        }
-
-
-        return PASS;
+			fclose(fp);
+			break;
+		}
+	}
+	return PASS;
 }
 
 

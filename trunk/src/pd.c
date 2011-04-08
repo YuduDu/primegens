@@ -156,14 +156,14 @@ short run_primer3(Query qry) {
 	       
 	fprintf(fp,"PRIMER_PRODUCT_SIZE_RANGE=%s\n", PPSR);
 	
-        if(strcmp(TARGET,"unassigned")!=0){
-            if(strlen(TARGET)>2)
-	    	fprintf(fp, "TARGET=%s\n", TARGET);}
+	if(strcmp(TARGET,"unassigned")!=0){
+		if(strlen(TARGET)>2)
+			fprintf(fp, "TARGET=%s\n", TARGET);}
         
-        if(CUT_SITE_COUNT > 0) {
-		find_maxCutSite_region(qry, &target_start, &target_length);
-		fprintf(fp, "TARGET=%d,%d\n", target_start, target_length);
-	    }
+		if(CUT_SITE_COUNT > 0) {
+			find_maxCutSite_region(qry, &target_start, &target_length);
+			fprintf(fp, "TARGET=%d,%d\n", target_start, target_length);
+		}
         
 	fprintf(fp,"PRIMER_EXPLAIN_FLAG=%d\n", PEF);
 	fprintf(fp,"PRIMER_FILE_FLAG=%d\n", PFF);
@@ -183,58 +183,58 @@ short run_primer3(Query qry) {
 	fprintf(fp,"PRIMER_SELF_ANY=%d\n", PSA);
 	fprintf(fp,"PRIMER_MAX_END_STABILITY=%f\n", PMES);
 	
-        fprintf(fp,"PRIMER_START_CODON_POSITION=%d\n", PSCP);
+	fprintf(fp,"PRIMER_START_CODON_POSITION=%d\n", PSCP);
 
-    fprintf(fp,"PRIMER_PRODUCT_MAX_TM=%f\n", PPMAXT);
-    fprintf(fp,"PRIMER_PRODUCT_MIN_TM=%f\n", PPMINT);
-    fprintf(fp,"PRIMER_GC_CLAMP=%d\n", PGC);
-    fprintf(fp,"PRIMER_DEFAULT_SIZE=%d\n", PDS);
-    fprintf(fp,"PRIMER_MAX_DIFF_TM=%f\n", PMDT);
-    fprintf(fp,"PRIMER_TM_SANTALUCIA=%d\n", PTS);
-    fprintf(fp,"PRIMER_SALT_CONC=%f\n", PSC);
-    fprintf(fp,"PRIMER_DIVALENT_CONC=%f\n", PDIVC);
-    fprintf(fp,"PRIMER_DNTP_CONC=%f\n", PDNTPC);
-    fprintf(fp,"PRIMER_SALT_CORRECTIONS=%f\n", PSALTC);
-    fprintf(fp,"PRIMER_LOWERCASE_MASKING=%d\n", PLM);
-    fprintf(fp,"PRIMER_DNA_CONC=%f\n", PDNAC);
-    fprintf(fp,"PRIMER_NUM_NS_ACCEPTED=%d\n", PNNSA);
-    fprintf(fp,"PRIMER_LIBERAL_BASE=%d\n", PLB);
-    fprintf(fp,"PRIMER_FIRST_BASE_INDEX=%d\n", PFBI);
-    fprintf(fp,"PRIMER_MIN_QUALITY=%d\n", PMQ);
-    fprintf(fp,"PRIMER_MIN_END_QUALITY=%d\n", PMEQ);
-    fprintf(fp,"PRIMER_QUALITY_RANGE_MIN=%d\n", PQRMIN);
-    fprintf(fp,"PRIMER_QUALITY_RANGE_MAX=%d\n", PQRMAX);
-    fprintf(fp,"PRIMER_INSIDE_PENALTY=%f\n", PIP);
-    fprintf(fp,"PRIMER_OUTSIDE_PENALTY=%f\n", POP);
-    fprintf(fp,"PRIMER_PRODUCT_OPT_TM=%f\n", PPOTM);
-    fprintf(fp,"PRIMER_PRODUCT_OPT_SIZE=%d\n", PPOS);
+	fprintf(fp,"PRIMER_PRODUCT_MAX_TM=%f\n", PPMAXT);
+	fprintf(fp,"PRIMER_PRODUCT_MIN_TM=%f\n", PPMINT);
+	fprintf(fp,"PRIMER_GC_CLAMP=%d\n", PGC);
+	fprintf(fp,"PRIMER_DEFAULT_SIZE=%d\n", PDS);
+	fprintf(fp,"PRIMER_MAX_DIFF_TM=%f\n", PMDT);
+	fprintf(fp,"PRIMER_TM_SANTALUCIA=%d\n", PTS);
+	fprintf(fp,"PRIMER_SALT_CONC=%f\n", PSC);
+	fprintf(fp,"PRIMER_DIVALENT_CONC=%f\n", PDIVC);
+	fprintf(fp,"PRIMER_DNTP_CONC=%f\n", PDNTPC);
+	fprintf(fp,"PRIMER_SALT_CORRECTIONS=%f\n", PSALTC);
+	fprintf(fp,"PRIMER_LOWERCASE_MASKING=%d\n", PLM);
+	fprintf(fp,"PRIMER_DNA_CONC=%f\n", PDNAC);
+	fprintf(fp,"PRIMER_NUM_NS_ACCEPTED=%d\n", PNNSA);
+	fprintf(fp,"PRIMER_LIBERAL_BASE=%d\n", PLB);
+	fprintf(fp,"PRIMER_FIRST_BASE_INDEX=%d\n", PFBI);
+	fprintf(fp,"PRIMER_MIN_QUALITY=%d\n", PMQ);
+	fprintf(fp,"PRIMER_MIN_END_QUALITY=%d\n", PMEQ);
+	fprintf(fp,"PRIMER_QUALITY_RANGE_MIN=%d\n", PQRMIN);
+	fprintf(fp,"PRIMER_QUALITY_RANGE_MAX=%d\n", PQRMAX);
+	fprintf(fp,"PRIMER_INSIDE_PENALTY=%f\n", PIP);
+	fprintf(fp,"PRIMER_OUTSIDE_PENALTY=%f\n", POP);
+	fprintf(fp,"PRIMER_PRODUCT_OPT_TM=%f\n", PPOTM);
+	fprintf(fp,"PRIMER_PRODUCT_OPT_SIZE=%d\n", PPOS);
 
 
-    fprintf(fp,"PRIMER_WT_TM_GT=%f\n", PWTG);
-    fprintf(fp,"PRIMER_WT_TM_LT=%f\n", PWTL);
-    fprintf(fp,"PRIMER_WT_SIZE_LT=%f\n", PWSL);
-    fprintf(fp,"PRIMER_WT_SIZE_GT=%f\n", PWSG);
-    fprintf(fp,"PRIMER_WT_GC_PERCENT_LT=%f\n", PWGPL);
-    fprintf(fp,"PRIMER_WT_GC_PERCENT_GT=%f\n", PWGPG);
-    fprintf(fp,"PRIMER_WT_COMPL_ANY=%f\n", PWCA);
-    fprintf(fp,"PRIMER_WT_COMPL_END=%f\n", PWCE);
-    fprintf(fp,"PRIMER_WT_NUM_NS=%f\n", PWNNS);
-    fprintf(fp,"PRIMER_WT_REP_SIM=%f\n", PWRS);
-    fprintf(fp,"PRIMER_WT_SEQ_QUAL=%f\n", PWSQ);
-    fprintf(fp,"PRIMER_WT_END_QUAL=%f\n", PWEQ);
-    fprintf(fp,"PRIMER_WT_POS_PENALTY=%f\n", PWPP);
-    fprintf(fp,"PRIMER_WT_END_STABILITY=%f\n", PWES);
-    fprintf(fp,"PRIMER_PAIR_WT_PR_PENALTY=%f\n", PPWPP);
-    fprintf(fp,"PRIMER_PAIR_WT_DIFF_TM=%f\n", PPWDTM);
-    fprintf(fp,"PRIMER_PAIR_WT_COMPL_ANY=%f\n", PPWCA);
-    fprintf(fp,"PRIMER_PAIR_WT_COMPL_END=%f\n", PPWCE);
-    fprintf(fp,"PRIMER_PAIR_WT_PRODUCT_TM_LT=%f\n", PPWPTL);
-    fprintf(fp,"PRIMER_PAIR_WT_PRODUCT_TM_GT=%f\n", PPWPTG);
-    fprintf(fp,"PRIMER_PAIR_WT_PRODUCT_SIZE_LT=%f\n", PPWPSL);
-    fprintf(fp,"PRIMER_PAIR_WT_PRODUCT_SIZE_GT=%f\n", PPWPSG);
-    fprintf(fp,"PRIMER_PAIR_WT_REP_SIM=%f\n", PPWRS);
+	fprintf(fp,"PRIMER_WT_TM_GT=%f\n", PWTG);
+	fprintf(fp,"PRIMER_WT_TM_LT=%f\n", PWTL);
+	fprintf(fp,"PRIMER_WT_SIZE_LT=%f\n", PWSL);
+	fprintf(fp,"PRIMER_WT_SIZE_GT=%f\n", PWSG);
+	fprintf(fp,"PRIMER_WT_GC_PERCENT_LT=%f\n", PWGPL);
+	fprintf(fp,"PRIMER_WT_GC_PERCENT_GT=%f\n", PWGPG);
+	fprintf(fp,"PRIMER_WT_COMPL_ANY=%f\n", PWCA);
+	fprintf(fp,"PRIMER_WT_COMPL_END=%f\n", PWCE);
+	fprintf(fp,"PRIMER_WT_NUM_NS=%f\n", PWNNS);
+	fprintf(fp,"PRIMER_WT_REP_SIM=%f\n", PWRS);
+	fprintf(fp,"PRIMER_WT_SEQ_QUAL=%f\n", PWSQ);
+	fprintf(fp,"PRIMER_WT_END_QUAL=%f\n", PWEQ);
+	fprintf(fp,"PRIMER_WT_POS_PENALTY=%f\n", PWPP);
+	fprintf(fp,"PRIMER_WT_END_STABILITY=%f\n", PWES);
+	fprintf(fp,"PRIMER_PAIR_WT_PR_PENALTY=%f\n", PPWPP);
+	fprintf(fp,"PRIMER_PAIR_WT_DIFF_TM=%f\n", PPWDTM);
+	fprintf(fp,"PRIMER_PAIR_WT_COMPL_ANY=%f\n", PPWCA);
+	fprintf(fp,"PRIMER_PAIR_WT_COMPL_END=%f\n", PPWCE);
+	fprintf(fp,"PRIMER_PAIR_WT_PRODUCT_TM_LT=%f\n", PPWPTL);
+	fprintf(fp,"PRIMER_PAIR_WT_PRODUCT_TM_GT=%f\n", PPWPTG);
+	fprintf(fp,"PRIMER_PAIR_WT_PRODUCT_SIZE_LT=%f\n", PPWPSL);
+	fprintf(fp,"PRIMER_PAIR_WT_PRODUCT_SIZE_GT=%f\n", PPWPSG);
+	fprintf(fp,"PRIMER_PAIR_WT_REP_SIM=%f\n", PPWRS);
 
-    fprintf(fp,"=\n");
+	fprintf(fp,"=\n");
 
 	fclose(fp);
 	

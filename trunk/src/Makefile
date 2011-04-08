@@ -119,34 +119,34 @@ $(PRIMEGENS_EXE): $(PRIMEGENS_OBJECTS)
 main.o: main.c lib.h defs.h util.h sspd.h fspd.h pspd.h probe.h input.h
 	$(CC) -c $(CC_FLAGS) -o $@ main.c
 
-util.o: util.c util.h lib.h defs.h
+util.o: util.c util.h lib.h defs.h oligotm.h
 	$(CC) -c $(CC_FLAGS) -o $@ util.c
 
-sspd.o: sspd.c sspd.h lib.h defs.h hbdzn.h
+sspd.o: sspd.c sspd.h lib.h defs.h hbdzn.h util.h input.h output.h pd.h pphit.h uhit.h
 	$(CC) -c $(CC_FLAGS) -o $@ sspd.c
 
-fspd.o: fspd.c fspd.h lib.h defs.h hbdzn.h
+fspd.o: fspd.c fspd.h lib.h defs.h hbdzn.h util.h input.h output.h pd.h pphit.h uhit.h
 	$(CC) -c $(CC_FLAGS) -o $@ fspd.c
 
-pspd.o: pspd.c pspd.h lib.h defs.h hbdzn.h
+pspd.o: pspd.c pspd.h lib.h defs.h hbdzn.h util.h input.h output.h pd.h pphit.h uhit.h SeqMapping.h
 	$(CC) -c $(CC_FLAGS) -o $@ pspd.c
 
-probe.o: probe.c probe.h lib.h defs.h
+probe.o: probe.c probe.h lib.h defs.h util.h input.h uhit.h
 	$(CC) -c $(CC_FLAGS) -o $@ probe.c
 
-input.o: input.c input.h lib.h defs.h
+input.o: input.c input.h lib.h defs.h util.h
 	$(CC) -c $(CC_FLAGS) -o $@ input.c
 
-pd.o: pd.c pd.h lib.h defs.h
+pd.o: pd.c pd.h lib.h defs.h util.h
 	$(CC) -c $(CC_FLAGS) -o $@ pd.c
 
-uhit.o: uhit.c uhit.h lib.h defs.h
+uhit.o: uhit.c uhit.h lib.h defs.h util.h
 	$(CC) -c $(CC_FLAGS) -o $@ uhit.c
 
-pphit.o: pphit.c pphit.h lib.h defs.h
+pphit.o: pphit.c pphit.h lib.h defs.h util.h
 	$(CC) -c $(CC_FLAGS) -o $@ pphit.c
 
-hbdzn.o: hbdzn.c hbdzn.h lib.h defs.h
+hbdzn.o: hbdzn.c hbdzn.h lib.h defs.h oligotm.h
 	$(CC) -c $(CC_FLAGS) -o $@ hbdzn.c
 
 SeqMapping.o: SeqMapping.c SeqMapping.h lib.h defs.h
@@ -155,7 +155,7 @@ SeqMapping.o: SeqMapping.c SeqMapping.h lib.h defs.h
 oligotm.o: oligotm.c oligotm.h lib.h defs.h
 	$(CC) -c $(CC_FLAGS) -o $@ oligotm.c
 
-output.o: output.c output.h lib.h defs.h
+output.o: output.c output.h lib.h defs.h util.h
 	$(CC) -c $(CC_FLAGS) -o $@ output.c
 
 #PRIMER3 Start

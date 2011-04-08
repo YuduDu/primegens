@@ -1,4 +1,10 @@
-
+/*
+ * This module contains following functionlities
+ * 1- formatting various databases for using blast
+ * 2- find unique oligos from the pair pairs 
+ * 3- run blast for unique oligos and save results
+ *
+ */
 
 #include "lib.h"
 #include "defs.h"
@@ -32,12 +38,6 @@ int format_chromosome_database(int bloop, int cloop) {
 	return PASS;
 }
 
-/* Always return PASS? */
-int format_chromosome_database_test(int bloop, int cloop) {
-
-	return PASS;
-}
-
 /* put a single database file into a virtual database */
 int format_single_database(void) {
 	char tdbname[FILENAME];
@@ -53,12 +53,6 @@ int format_single_database(void) {
 	sprintf(cmd, "%s -l %s -o", cmd, fn_fmtdblog);
 	p_exec(cmd);						/*formatdb command*/
 	printf("%s build and format virtual single database...done!\n",T_S());
-	return PASS;
-}
-
-/* Always return PASS? */
-int format_single_database_test(void) {
-
 	return PASS;
 }
 
@@ -82,12 +76,6 @@ int format_multiple_database(void) {
 		printf("done!\n");
 	}
 	printf("%s build/format multiple virtual database...done!\n",T_S());
-	return PASS;
-}
-
-/* Always returns PASS */
-int format_multiple_database_test(void) {
-	
 	return PASS;
 }
 
@@ -175,16 +163,6 @@ int run_uo_blast_chromosome(int bloop, int cloop) {
 	return PASS;
 }
 
-/* print unique oligos? */
-int run_uo_blast_chromosome_test(int bloop, int cloop){
-	int i=0;
-
-	for(i=0; i<uoligo_count; i++) {
-		printf("oligo[%3d].id=%s\n",i+1,uoligo[i].id);
-		printf("oligo[%3d].seq=%s\n",i+1,uoligo[i].nseq);
-	}
-	return PASS;
-}
 
 /* run blast on the unique oligos from a single database */
 int run_uo_blast_single(void) {
@@ -201,12 +179,6 @@ int run_uo_blast_single(void) {
 	return PASS;
 }
 
-/* Always return PASS */
-int run_uo_blast_single_test(void) {
-	
-	return PASS;
-}
-
 /* run blast on oligos from multiple databases */
 int run_uo_blast_multiple(int dbcount) {
 	char cmd[BCOMMAND];
@@ -218,12 +190,6 @@ int run_uo_blast_multiple(int dbcount) {
 	p_exec(cmd);						/*blast command*/
 	printf("%s megablast for input oligos from %s", T_S(), fn_bin);
 	printf(" against virtual databse %s%d...done!\n",fn_vdb,dbcount);
-	return PASS;
-}
-
-/* Always return PASS */
-int run_uo_blast_multiple_test(int dbcount) {
-
 	return PASS;
 }
 
@@ -382,56 +348,6 @@ int save_blast_output_chromosome(int bloop, int cloop) {
 	return res;
 }
 
-
-int save_blast_output_chromosome_test(int bloop, int cloop) {
-	int i=0, j=0, d=0, c=0, res;
-	int s=0, e=0, h=0, t=0;
-	char chr1[BISULCHR], chr2[BISULCHR];
-
-	printf("%s verifying saved blast output for ",T_S());
-	printf("bloop %02d and cloop %02d...\n", bloop, cloop);
-	printf("%s total unique oligos = %d\n",T_S(),uoligo_count);
-	res = PASS;
-	printf("%s check...chrID[ndx] for each uoligo is same?\n",T_S());
-	for(i=0; i < uoligo_count; i++) {
-		for(j=i+1; j < uoligo_count; j++) {
-			if (dlevel > 3)
-				printf("%s compare brecords IDs %02d <--> %02d\n",T_S(),i,j);
-			for(c=cloop; c < (cloop + CHRDBINLOOP); c++) {
-				strcpy(chr1, uoligo[i].brecord[c].chr);
-				strcpy(chr2, uoligo[j].brecord[c].chr);
-				if(strcmp(chr1, chr2)!=0) {
-					printf("%s uoligo[%02d]->brecord[%02d]",T_S(),i,c);
-					printf("->chr=[%s]\n",uoligo[i].brecord[c].chr);
-					printf("%s uoligo[%02d]->brecord[%02d]",T_S(),j,c);
-					printf("->chr=[%s]\n",uoligo[i].brecord[c].chr);
-					printf("fetal error:above two ID should be same!\n");
-					res = FAIL;
-				}
-			}
-		}
-	}
-	if(res == PASS)
-		printf("%s chrID[ndx] for each uoligo...verified!\n",T_S());
-	for(i=0; i < uoligo_count; i++) {
-		printf("%s info for uoligo %02d)\t", T_S(), i+1); 
-		printf("uid:%s nseq:[%s]\n", uoligo[i].id, uoligo[i].nseq);
-		for(c=cloop; c < (cloop + CHRDBINLOOP); c++) {
-			printf("%s chr#%d [%s] total hits:%d (type,start-end)\n", T_S(), \
-					c, uoligo[i].brecord[c].chr, uoligo[i].brecord[c].bh);
-			for(h=0; h < uoligo[i].brecord[c].bh; h++) 
-				printf(" (%d,%d-%d)",uoligo[i].brecord[c].bht[h], \
-						uoligo[i].brecord[c].bhs[h],uoligo[i].brecord[c].bhe[h]);
-			printf("\n");
-		}
-	}
-	printf("%s verifying saved blast output for ",T_S());
-	printf("bloop %02d and cloop %02d...done!\n", bloop, cloop);
-	
-	return res;
-
-}
-
 /* Save the output from blast on the unique oligos taken from a single database */
 int save_blast_output_single(void) {
 	FILE *fp;
@@ -461,7 +377,7 @@ int save_blast_output_single(void) {
 		}
 		/* count the hits for the current uligo */
 		if(strncmp(line,BHITTAG,BHITCOMP)==0) {
-			br_ndx = 0;			/*blast hit counter for current uoligo*/
+			br_ndx = 0;						/*blast hit counter for current uoligo*/
 			fgets(line, MLINE, fp);		/*empty line*/
 			fgets(line, MLINE, fp);		/*first hit always exist*/
 			do {
@@ -566,145 +482,6 @@ int save_blast_output_single(void) {
 					printf("%d ",uoligo[uo].brecord[br_ndx].bhs[h]);
 					printf("%d\n",uoligo[uo].brecord[br_ndx].bhe[h]);
 				}
-			}
-			continue;
-		}
-	}
-	fclose(fp);
-	printf("%s unique oligos blast hit from %s",T_S(), fn_bout);
-	printf("\tsaved into memory!\n");
-	return PASS;
-}
-
-
-int save_blast_output_single_test(void) {
-	FILE *fp;
-	char line[MLINE], tmp[SLINE];
-	int count=0, start_flag=0, res=0;
-	int	br_ndx=0;			/*br_ndx:blast records index*/
-	int	uo=0, bo=0, db=0, h=0, len=0;	/*bo:blast output for a uligo*/
-	int qs=0, qe=0, ss=0, se=0;			/*query & sbjct*/
-	size_t size;
-
-	printf("%s read unique oligos blast hits from", T_S());
-	printf(" %s and save blast hits into memory...\n", fn_bout);
-	
-	fp=p_fopen_error_exit(fn_bout, "r");
-	bo=-1;
-	while(fgets(line, MLINE, fp)) {			/*count blast hit*/
-		if(strncmp(line, "Query=", 6)==0) {
-			printf("\nnext uoligo ");
-			bo++;		/*blast output for next oligo*/
-			printf("(bo:%2d)", bo);
-			sscanf(line,"%*s%s",tmp);
-			printf(" %s", tmp);
-			for(uo=0; uo < uoligo_count; uo++) 
-				if(strcmp(tmp,uoligo[uo].id)==0)
-					break;
-			if(bo!=uo) 
-				p_continue("uoligo-blast order mismatch\n");
-			uoligo[uo].br_count = 0;
-			continue;
-		}
-		if(strncmp(line,BHITTAG,BHITCOMP)==0) {
-			br_ndx = 0;			/*blast hit counter for current uoligo*/
-			fgets(line, MLINE, fp);		/*empty line*/
-			fgets(line, MLINE, fp);		/*first hit always exist*/
-			do {
-				br_ndx++;
-				fgets(line, MLINE, fp);
-			} while(strlen(line) >= 2);		
-			printf(" %4d brecords", br_ndx);
-			size = br_ndx*sizeof(BRecord);
-			uoligo[uo].br_count = br_ndx;
-			printf(" (uo:%2d)", uo);
-			uoligo[uo].brecord=(BRecord *)p_malloc(size);
-			printf(" malloc");
-			for(br_ndx=0; br_ndx < uoligo[uo].br_count; br_ndx++)
-				uoligo[uo].brecord[br_ndx].bh=0;
-			br_ndx = -1;
-			printf("done!\n");
-			continue;
-		}
-		if(strncmp(line, ">", 1)==0) {	
-			br_ndx++;
-			sscanf(line, "%s", uoligo[uo].brecord[br_ndx].chr);
-			printf("\n(%4d)>%s",br_ndx,uoligo[uo].brecord[br_ndx].chr);
-			printf(" uo:%2d br_ndx:%4d ", uo, br_ndx);
-			continue;
-		}
-		if(strncmp(line, "Query:", 6)==0) {	
-			printf("*");
-			uoligo[uo].brecord[br_ndx].bh++;
-			continue;
-		}
-	}
-	printf("\n");		/*debug mode only*/
-	for(uo=0; uo < uoligo_count; uo++) {
-		printf("%s unique oligo %02d) ", T_S(), uo+1);
-		printf(" %-25s ",uoligo[uo].id);
-		printf("%-30s ",uoligo[uo].nseq);
-		if(uoligo[uo].br_count==0)
-			printf("       no hits found!\n");
-		else {
-			printf("%-6d hits found!\n",uoligo[uo].br_count);
-			for(br_ndx=0; br_ndx < uoligo[uo].br_count; br_ndx++) {
-				printf("%s\t %4d) ", T_S(), br_ndx+1);
-				printf("%-30s",uoligo[uo].brecord[br_ndx].chr);
-				printf("...%2d hits\n",uoligo[uo].brecord[br_ndx].bh);
-				size = uoligo[uo].brecord[br_ndx].bh*sizeof(int);
-				uoligo[uo].brecord[br_ndx].bht=(int *)p_malloc(size);
-				uoligo[uo].brecord[br_ndx].bhs=(int *)p_malloc(size);
-				uoligo[uo].brecord[br_ndx].bhe=(int *)p_malloc(size);
-			}
-		}
-	}
-	rewind(fp);
-	bo=-1;
-	while(fgets(line, MLINE, fp)) {
-		if(strncmp(line, "Query=", 6)==0) {
-			bo++;				/*blast oligo ndx*/
-			br_ndx = -1;
-			sscanf(line,"%*s%s",tmp);
-			for(uo=0; uo < uoligo_count; uo++) 
-				if(strcmp(tmp,uoligo[uo].id)==0)
-					break;
-			if(bo!=uo) 
-				p_continue("blast-oligo order mismatch\n");
-			continue;
-		}
-		if(strncmp(line, ">", 1)==0) {	
-			br_ndx++;
-			h = -1;				/*bhast hit ndx*/
-			continue;
-		}
-		if(strncmp(line, " Strand = ", 10)==0) {
-			++h;				/*new hit*/
-			sscanf(line,"%*s%*s%*s%*s%s",tmp);
-			if(strcmp(tmp, TPP)==0) 
-				uoligo[uo].brecord[br_ndx].bht[h] = PP;
-			else if(strcmp(tmp, TPM)==0) 
-				uoligo[uo].brecord[br_ndx].bht[h] = PM;
-			fgets(line, MLINE, fp);		/*junk*/
-			fgets(line, MLINE, fp);		/*junk*/
-			fgets(line, MLINE, fp);	
-			if(strncmp(line, "Query:", 6)!=0) 
-				p_exit("blast format error!\n");
-			sscanf(line,"%*s%d%*s%d", &qs, &qe);
-			fgets(line, MLINE, fp);		/*junk*/
-			fgets(line, MLINE, fp);	
-			if(strncmp(line, "Sbjct:", 6)!=0) 
-				p_exit("blast format error!\n");
-			sscanf(line,"%*s%d%*s%d", &ss, &se);
-			if(uoligo[uo].brecord[br_ndx].bht[h]==PP) {
-				len = uoligo[uo].len;
-				uoligo[uo].brecord[br_ndx].bhs[h]=ss-(qs-1);	/*start*/
-				uoligo[uo].brecord[br_ndx].bhe[h]=se+(len-qe);	/*end*/
-			}
-			if(uoligo[uo].brecord[br_ndx].bht[h]==PM) {
-				len = uoligo[uo].len;
-				uoligo[uo].brecord[br_ndx].bhs[h]=se-(len-qe);	/*start*/
-				uoligo[uo].brecord[br_ndx].bhe[h]=ss+(qs-1);	/*end*/
 			}
 			continue;
 		}

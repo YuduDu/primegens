@@ -349,7 +349,7 @@ short pspd_loop (void) {
 				if(strncmp(line, ">", 1)==0) {				
 						start_flag = 0;
 						if (read >= 0) {	
-							//aligned portion of query sequence
+							/* aligned portion of query sequence */
 							if(end - start >= PSPD_MINFILTERLENGTH) {
 								block[read][0] = start; 
 								block[read][1] = end;
@@ -712,5 +712,3 @@ short pspd_loop (void) {
 		fclose(fsim);
 	return PASS;
 }
-
-

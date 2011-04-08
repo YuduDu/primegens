@@ -148,7 +148,6 @@ short sspd_loop(void) {
 		if(DATABASE_TYPE==1) {
 				run_uo_blast_single();
 				save_blast_output_single();
-				//save_blast_output_single_test();
 				sprintf(cmd, "rm %s", fn_bout);
 				p_exec(cmd);
 
@@ -180,8 +179,7 @@ short sspd_loop(void) {
 		}
 
 		sprintf(cmd, "rm %s", fn_bin);
-		p_exec(cmd);		
-		//res = uoligo_brecords_test();
+		p_exec(cmd);
 		if(res==FAIL) 
 			p_exit("problem in uoligo_brecords_test function.\n");	
 
@@ -259,7 +257,6 @@ short sspd_loop(void) {
 					free(ppair[pp].chit);
 			}
 		} else if(DATABASE_TYPE==2) {
-			//res = chk_hybridization_multiple(q);		/*qinfo is required*/
 			if(res==FAIL)
 				p_exit("problem inside chk_hybirization function\n");
 		} else if(DATABASE_TYPE==3) {
@@ -311,11 +308,10 @@ short sspd_loop(void) {
 		sprintf(cmd, "del %s %s", fn_p3in, fn_p3out);
 		 p_exec(cmd);                    /*delete primer3 tmp files*/
 	#else
+	/* REMOVE? */
 //		 sprintf(cmd, "rm %s %s", fn_p3in, fn_p3out);
 //		 p_exec(cmd);                    /*delete primer3 tmp files*/
 	#endif
 
 	return PASS;
 }
-
-

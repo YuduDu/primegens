@@ -61,61 +61,61 @@ short init_param(void) {
 	PSA=8;              /*PRIMER_SELF_ANY=100*/
 	PMES=100.0;         /*PRIMER_MAX_END_STABILITY=100.0*/
 
-        strcpy(PPSR, "250-450");                  /*PRIMER_PRODUCT_SIZE_RANGE=250-450*/
-        strcpy(TARGET, "unassigned");                /*target region to specify*/
-        strcpy(PIR, "unassigned");                   /*INCLUDED_REGION*/
-        strcpy(PER, "unassigned");                   /*EXCLUDED_REGION*/
-        strcpy(PSQ, "unassigned");                   /*PRIMER_SEQUENCE_QUALITY*/
-        PSCP=-1000000;                         /*PRIMER_START_CODON_POSITION=-1000000*/
-        PPA=0;                                 /*PRIMER_PICK_ANYWAY=0*/
+	strcpy(PPSR, "250-450");                  /*PRIMER_PRODUCT_SIZE_RANGE=250-450*/
+	strcpy(TARGET, "unassigned");                /*target region to specify*/
+	strcpy(PIR, "unassigned");                   /*INCLUDED_REGION*/
+	strcpy(PER, "unassigned");                   /*EXCLUDED_REGION*/
+	strcpy(PSQ, "unassigned");                   /*PRIMER_SEQUENCE_QUALITY*/
+	PSCP=-1000000;                         /*PRIMER_START_CODON_POSITION=-1000000*/
+	PPA=0;                                 /*PRIMER_PICK_ANYWAY=0*/
 
-        PPMAXT=1000000.0;                      /*PRIMER_PRODUCT_MAX_TM=1000000.0*/
-        PPMINT=-1000000.0;                     /*PRIMER_PRODUCT_MIN_TM=-1000000.0*/
-        PGC=0;                                 /*PRIMER_GC_CLAMP=0*/
-        PDS=20;                                /*PRIMER_DEFAULT_SIZE=20*/
-        PMDT=100.0;                            /*PRIMER_MAX_DIFF_TM=100.0C*/
-        PTS=1;                                 /*PRIMER_TM_SANTALUCIA=0*/
-        PSC=50.0;                              /*PRIMER_SALT_CONC=50.0 mM*/
-        PDIVC=0.0;                             /*PRIMER_DIVALENT_CONC=0.0 mM*/
-        PDNTPC=0.0;                            /*PRIMER_DNTP_CONC=0.0 mM*/
-        PSALTC=1;                              /*PRIMER_SALT_CORRECTIONS=0*/
-        PLM=0;                                 /*PRIMER_LOWERCASE_MASKING=0*/
-        PDNAC=50.0;                            /*PRIMER_DNA_CONC=50.0nM*/
-        PNNSA=0;                               /*PRIMER_NUM_NS_ACCEPTED=0*/
-        PLB=0;                                 /*PRIMER_LIBERAL_BASE=0*/
-        PFBI=0;                                /*PRIMER_FIRST_BASE_INDEX=0*/
-        PMQ=0;                                 /*PRIMER_MIN_QUALITY=0*/
-        PMEQ=0;                                /*PRIMER_MIN_END_QUALITY=0*/
-        PQRMIN=0;                              /*PRIMER_QUALITY_RANGE_MIN=0*/
-        PQRMAX=100;                            /*PRIMER_QUALITY_RANGE_MAX=100*/
-        PIP=-1.0;                              /*PRIMER_INSIDE_PENALTY=-1.0*/
-        POP=0.0;                               /*PRIMER_OUTSIDE_PENALTY=0.0*/
-        PPOTM=0.0;                             /*PRIMER_PRODUCT_OPT_TM=0.0*/
-        PPOS=0;                                /*PRIMER_PRODUCT_OPT_SIZE=0*/
+	PPMAXT=1000000.0;                      /*PRIMER_PRODUCT_MAX_TM=1000000.0*/
+	PPMINT=-1000000.0;                     /*PRIMER_PRODUCT_MIN_TM=-1000000.0*/
+	PGC=0;                                 /*PRIMER_GC_CLAMP=0*/
+	PDS=20;                                /*PRIMER_DEFAULT_SIZE=20*/
+	PMDT=100.0;                            /*PRIMER_MAX_DIFF_TM=100.0C*/
+	PTS=1;                                 /*PRIMER_TM_SANTALUCIA=0*/
+	PSC=50.0;                              /*PRIMER_SALT_CONC=50.0 mM*/
+	PDIVC=0.0;                             /*PRIMER_DIVALENT_CONC=0.0 mM*/
+	PDNTPC=0.0;                            /*PRIMER_DNTP_CONC=0.0 mM*/
+	PSALTC=1;                              /*PRIMER_SALT_CORRECTIONS=0*/
+	PLM=0;                                 /*PRIMER_LOWERCASE_MASKING=0*/
+	PDNAC=50.0;                            /*PRIMER_DNA_CONC=50.0nM*/
+	PNNSA=0;                               /*PRIMER_NUM_NS_ACCEPTED=0*/
+	PLB=0;                                 /*PRIMER_LIBERAL_BASE=0*/
+	PFBI=0;                                /*PRIMER_FIRST_BASE_INDEX=0*/
+	PMQ=0;                                 /*PRIMER_MIN_QUALITY=0*/
+	PMEQ=0;                                /*PRIMER_MIN_END_QUALITY=0*/
+	PQRMIN=0;                              /*PRIMER_QUALITY_RANGE_MIN=0*/
+	PQRMAX=100;                            /*PRIMER_QUALITY_RANGE_MAX=100*/
+	PIP=-1.0;                              /*PRIMER_INSIDE_PENALTY=-1.0*/
+	POP=0.0;                               /*PRIMER_OUTSIDE_PENALTY=0.0*/
+	PPOTM=0.0;                             /*PRIMER_PRODUCT_OPT_TM=0.0*/
+	PPOS=0;                                /*PRIMER_PRODUCT_OPT_SIZE=0*/
 
-        PWTG=1.0;                              /*PRIMER_WT_TM_GT=1.0*/
-        PWTL=1.0;                              /*PRIMER_WT_TM_LT=1.0*/
-        PWSL=1.0;                              /*PRIMER_WT_SIZE_LT=1.0*/
-        PWSG=1.0;                              /*PRIMER_WT_SIZE_GT=1.0*/
-        PWGPL=1.0;                             /*PRIMER_WT_GC_PERCENT_LT=1.0*/
-        PWGPG=1.0;                             /*PRIMER_WT_GC_PERCENT_GT=1.0*/
-        PWCA=0.0;                              /*PRIMER_WT_COMPL_ANY=0.0*/
-        PWCE=0.0;                              /*PRIMER_WT_COMPL_END=0.0*/
-        PWNNS=0.0;                             /*PRIMER_WT_NUM_NS=0.0*/
-        PWRS=0.0;                              /*PRIMER_WT_REP_SIM=0.0*/
-        PWSQ=0.0;                              /*PRIMER_WT_SEQ_QUAL=0.0*/
-        PWEQ=0.0;                              /*PRIMER_WT_END_QUAL=0.0*/
-        PWPP=0.0;                              /*PRIMER_WT_POS_PENALTY=0.0*/
-        PWES=0.0;                              /*PRIMER_WT_END_STABILITY=0.0*/
-        PPWPP=1.0;                             /*PRIMER_PAIR_WT_PR_PENALTY=1.0*/
-        PPWDTM=0.0;                            /*PRIMER_PAIR_WT_DIFF_TM=0.0*/
-        PPWCA=0.0;                             /*PRIMER_PAIR_WT_COMPL_ANY=0.0*/
-        PPWCE=0.0;                             /*PRIMER_PAIR_WT_COMPL_END=0.0*/
-        PPWPTL=0.0;                            /*PRIMER_PAIR_WT_PRODUCT_TM_LT=0.0*/
-        PPWPTG=0.0;                            /*PRIMER_PAIR_WT_PRODUCT_TM_GT=0.0*/
-        PPWPSL=0.0;                            /*PRIMER_PAIR_WT_PRODUCT_SIZE_LT=0.0*/
-        PPWPSG=0.0;                            /*PRIMER_PAIR_WT_PRODUCT_SIZE_GT=0.0*/
-        PPWRS=0.0;                             /*PRIMER_PAIR_WT_REP_SIM=0.0*/
+	PWTG=1.0;                              /*PRIMER_WT_TM_GT=1.0*/
+	PWTL=1.0;                              /*PRIMER_WT_TM_LT=1.0*/
+	PWSL=1.0;                              /*PRIMER_WT_SIZE_LT=1.0*/
+	PWSG=1.0;                              /*PRIMER_WT_SIZE_GT=1.0*/
+	PWGPL=1.0;                             /*PRIMER_WT_GC_PERCENT_LT=1.0*/
+	PWGPG=1.0;                             /*PRIMER_WT_GC_PERCENT_GT=1.0*/
+	PWCA=0.0;                              /*PRIMER_WT_COMPL_ANY=0.0*/
+	PWCE=0.0;                              /*PRIMER_WT_COMPL_END=0.0*/
+	PWNNS=0.0;                             /*PRIMER_WT_NUM_NS=0.0*/
+	PWRS=0.0;                              /*PRIMER_WT_REP_SIM=0.0*/
+	PWSQ=0.0;                              /*PRIMER_WT_SEQ_QUAL=0.0*/
+	PWEQ=0.0;                              /*PRIMER_WT_END_QUAL=0.0*/
+	PWPP=0.0;                              /*PRIMER_WT_POS_PENALTY=0.0*/
+	PWES=0.0;                              /*PRIMER_WT_END_STABILITY=0.0*/
+	PPWPP=1.0;                             /*PRIMER_PAIR_WT_PR_PENALTY=1.0*/
+	PPWDTM=0.0;                            /*PRIMER_PAIR_WT_DIFF_TM=0.0*/
+	PPWCA=0.0;                             /*PRIMER_PAIR_WT_COMPL_ANY=0.0*/
+	PPWCE=0.0;                             /*PRIMER_PAIR_WT_COMPL_END=0.0*/
+	PPWPTL=0.0;                            /*PRIMER_PAIR_WT_PRODUCT_TM_LT=0.0*/
+	PPWPTG=0.0;                            /*PRIMER_PAIR_WT_PRODUCT_TM_GT=0.0*/
+	PPWPSL=0.0;                            /*PRIMER_PAIR_WT_PRODUCT_SIZE_LT=0.0*/
+	PPWPSG=0.0;                            /*PRIMER_PAIR_WT_PRODUCT_SIZE_GT=0.0*/
+	PPWRS=0.0;                             /*PRIMER_PAIR_WT_REP_SIM=0.0*/
 
 	/*probe design only default setting*/
 	PROBE_DESIGN=0;
@@ -137,7 +137,7 @@ short init_param(void) {
 
 /* Deal with command line parameters */
 short get_param (int argc, char * argv[]) {
-	short	i=0;	/*q; d/l; p; o options*/
+	short	i=0;		/*q; d/l; p; o options*/
 	char *tmp;		/*used temporarity for storing string*/
 	char s_fn_log[SLINE], s_fn_status[SLINE];
 	FILE *fp;
@@ -251,18 +251,18 @@ short set_default_param(void) {
 	char s_fn_query[SLINE];
 	FILE *fout1, *fp;
 	
-    strcpy(s_blast, "blast command");
-    strcpy(s_megablast, "megablast command");
-    strcpy(s_formatdb, "formatdb command");
-    strcpy(s_primer3, "primer3 command");
-    strcpy(s_env_path, "environment path");
+	strcpy(s_blast, "blast command");
+	strcpy(s_megablast, "megablast command");
+	strcpy(s_formatdb, "formatdb command");
+	strcpy(s_primer3, "primer3 command");
+	strcpy(s_env_path, "environment path");
 	strcpy(s_fn_fmtdblog, "formatdb log filename");
-    strcpy(s_fn_vdb, "virtual database filename");
-    strcpy(s_fn_p3in, "primer3 input filename");
-    strcpy(s_fn_p3out, "primer3 output filename");
-    strcpy(s_fn_uoligo, "unique oligo list filename");
-    strcpy(s_fn_bin, "blast intput filename");
-    strcpy(s_fn_bout, "blast output filename");
+	strcpy(s_fn_vdb, "virtual database filename");
+	strcpy(s_fn_p3in, "primer3 input filename");
+	strcpy(s_fn_p3out, "primer3 output filename");
+	strcpy(s_fn_uoligo, "unique oligo list filename");
+	strcpy(s_fn_bin, "blast intput filename");
+	strcpy(s_fn_bout, "blast output filename");
     
 	/* Deal with Chromosome info */
 	if(DATABASE_TYPE==3) {
@@ -435,11 +435,11 @@ short set_default_param(void) {
 	if(PROBE_DESIGN!=1) {
 		fout1 = p_fopen_error_exit(fn_out1, "w");
     	fprintf(fout1, "QUERY_NAME\t");
-        if (CUT_SITE_COUNT>0){
-    	    fprintf(fout1, "MAX_CUTSITE_REGION\t");
-    	    fprintf(fout1, "# of CUT_SITE\t");
-    	    fprintf(fout1, "CUT_SITE\t");
-        }
+		if (CUT_SITE_COUNT>0){
+			fprintf(fout1, "MAX_CUTSITE_REGION\t");
+			fprintf(fout1, "# of CUT_SITE\t");
+			fprintf(fout1, "CUT_SITE\t");
+		}
     	fprintf(fout1, "LEFT_PRIMER\t");
     	fprintf(fout1, "LEFT_PRIMER_START_POSITION\t");
     	fprintf(fout1, "LEFT_PRIMER_LENGTH\t");
@@ -518,69 +518,56 @@ short set_default_param(void) {
 	fprintf(fp, "\t PRIMER_MAX_END_STABILITY %f \n", PMES);
 	fprintf(fp, "\t HBRDN_DISPLAY_COUNT: %d\n",HBRDN_DISPLAY_COUNT);
        
-        fprintf(fp, "\t PRIMER_PRODUCT_MAX_TM : %f \n", PPMAXT);
-        fprintf(fp, "\t PRIMER_PRODUCT_MIN_TM : %f \n", PPMINT);
-        fprintf(fp, "\t PRIMER_GC_CLAMP : %d \n", PGC);
-        fprintf(fp, "\t PRIMER_DEFAULT_SIZE : %d \n", PDS);
-        fprintf(fp, "\t PRIMER_MAX_DIFF_TM : %f \n", PMDT);
-        fprintf(fp, "\t PRIMER_TM_SANTALUCIA : %d \n", PTS);
-        fprintf(fp, "\t PRIMER_SALT_CONC : %f \n", PSC);
-        fprintf(fp, "\t PRIMER_DIVALENT_CONC : %f \n", PDIVC);
-        fprintf(fp, "\t PRIMER_DNTP_CONC : %f \n", PDNTPC);
-        fprintf(fp, "\t PRIMER_SALT_CORRECTIONS : %d \n", PSALTC);
-        fprintf(fp, "\t PRIMER_LOWERCASE_MASKING : %d \n", PLM);
-        fprintf(fp, "\t PRIMER_DNA_CONC : %f \n", PDNAC);
-        fprintf(fp, "\t PRIMER_NUM_NS_ACCEPTED : %d \n", PNNSA);
-        fprintf(fp, "\t PRIMER_LIBERAL_BASE : %d \n", PLB);
-        fprintf(fp, "\t PRIMER_FIRST_BASE_INDEX : %d \n", PFBI);
-        fprintf(fp, "\t PRIMER_MIN_QUALITY : %d \n", PMQ);
-        fprintf(fp, "\t PRIMER_MIN_END_QUALITY : %d \n", PMEQ);
-        fprintf(fp, "\t PRIMER_QUALITY_RANGE_MIN : %d \n", PQRMIN);
-        fprintf(fp, "\t PRIMER_QUALITY_RANGE_MAX : %f \n", PQRMAX);
-        fprintf(fp, "\t PRIMER_INSIDE_PENALTY : %f \n", PIP);
-        fprintf(fp, "\t PRIMER_OUTSIDE_PENALTY : %f \n", POP);
-        fprintf(fp, "\t PRIMER_PRODUCT_OPT_TM : %f \n", PPOTM);
-        fprintf(fp, "\t PRIMER_PRODUCT_OPT_SIZE : %d \n", PPOS);
+	fprintf(fp, "\t PRIMER_PRODUCT_MAX_TM : %f \n", PPMAXT);
+	fprintf(fp, "\t PRIMER_PRODUCT_MIN_TM : %f \n", PPMINT);
+	fprintf(fp, "\t PRIMER_GC_CLAMP : %d \n", PGC);
+	fprintf(fp, "\t PRIMER_DEFAULT_SIZE : %d \n", PDS);
+	fprintf(fp, "\t PRIMER_MAX_DIFF_TM : %f \n", PMDT);
+	fprintf(fp, "\t PRIMER_TM_SANTALUCIA : %d \n", PTS);
+	fprintf(fp, "\t PRIMER_SALT_CONC : %f \n", PSC);
+	fprintf(fp, "\t PRIMER_DIVALENT_CONC : %f \n", PDIVC);
+	fprintf(fp, "\t PRIMER_DNTP_CONC : %f \n", PDNTPC);
+	fprintf(fp, "\t PRIMER_SALT_CORRECTIONS : %d \n", PSALTC);
+	fprintf(fp, "\t PRIMER_LOWERCASE_MASKING : %d \n", PLM);
+	fprintf(fp, "\t PRIMER_DNA_CONC : %f \n", PDNAC);
+	fprintf(fp, "\t PRIMER_NUM_NS_ACCEPTED : %d \n", PNNSA);
+	fprintf(fp, "\t PRIMER_LIBERAL_BASE : %d \n", PLB);
+	fprintf(fp, "\t PRIMER_FIRST_BASE_INDEX : %d \n", PFBI);
+	fprintf(fp, "\t PRIMER_MIN_QUALITY : %d \n", PMQ);
+	fprintf(fp, "\t PRIMER_MIN_END_QUALITY : %d \n", PMEQ);
+	fprintf(fp, "\t PRIMER_QUALITY_RANGE_MIN : %d \n", PQRMIN);
+	fprintf(fp, "\t PRIMER_QUALITY_RANGE_MAX : %f \n", PQRMAX);
+	fprintf(fp, "\t PRIMER_INSIDE_PENALTY : %f \n", PIP);
+	fprintf(fp, "\t PRIMER_OUTSIDE_PENALTY : %f \n", POP);
+	fprintf(fp, "\t PRIMER_PRODUCT_OPT_TM : %f \n", PPOTM);
+	fprintf(fp, "\t PRIMER_PRODUCT_OPT_SIZE : %d \n", PPOS);
 
-        fprintf(fp, "\t PRIMER_WT_TM_GT : %f \n", PWTG);
-        fprintf(fp, "\t PRIMER_WT_TM_LT : %f \n", PWTL);
-        fprintf(fp, "\t PRIMER_WT_SIZE_LT : %f \n", PWSL);
-        fprintf(fp, "\t PRIMER_WT_SIZE_GT : %f \n", PWSG);
-        fprintf(fp, "\t PRIMER_WT_GC_PERCENT_LT : %f \n", PWGPL);
-        fprintf(fp, "\t PRIMER_WT_GC_PERCENT_GT : %f \n", PWGPG);
-        fprintf(fp, "\t PRIMER_WT_COMPL_ANY : %f \n", PWCA);
-        fprintf(fp, "\t PRIMER_WT_COMPL_END : %f \n", PWCE);
-        fprintf(fp, "\t PRIMER_WT_NUM_NS : %f \n", PWNNS);
-        fprintf(fp, "\t PRIMER_WT_REP_SIM : %f \n", PWRS);
-        fprintf(fp, "\t PRIMER_WT_SEQ_QUAL : %f \n", PWSQ);
-        fprintf(fp, "\t PRIMER_WT_END_QUAL : %f \n", PWEQ);
-        fprintf(fp, "\t PRIMER_WT_POS_PENALTY : %f \n", PWPP);
-        fprintf(fp, "\t PRIMER_WT_END_STABILITY : %f \n", PWES);
-        fprintf(fp, "\t PRIMER_PAIR_WT_PR_PENALTY : %f \n", PPWPP);
-        fprintf(fp, "\t PRIMER_PAIR_WT_DIFF_TM : %f \n", PPWDTM);
-        fprintf(fp, "\t PRIMER_PAIR_WT_COMPL_ANY : %f \n", PPWCA);
-        fprintf(fp, "\t PRIMER_PAIR_WT_COMPL_END : %f \n", PPWCE);
-        fprintf(fp, "\t PRIMER_PAIR_WT_PRODUCT_TM_LT : %f \n", PPWPTL);
-        fprintf(fp, "\t PRIMER_PAIR_WT_PRODUCT_TM_GT : %f \n", PPWPTG);
-        fprintf(fp, "\t PRIMER_PAIR_WT_PRODUCT_SIZE_LT : %f \n", PPWPSL);
-        fprintf(fp, "\t PRIMER_PAIR_WT_PRODUCT_SIZE_GT : %f \n", PPWPSG);
-        fprintf(fp, "\t PRIMER_PAIR_WT_REP_SIM : %f \n", PPWRS);
+	fprintf(fp, "\t PRIMER_WT_TM_GT : %f \n", PWTG);
+	fprintf(fp, "\t PRIMER_WT_TM_LT : %f \n", PWTL);
+	fprintf(fp, "\t PRIMER_WT_SIZE_LT : %f \n", PWSL);
+	fprintf(fp, "\t PRIMER_WT_SIZE_GT : %f \n", PWSG);
+	fprintf(fp, "\t PRIMER_WT_GC_PERCENT_LT : %f \n", PWGPL);
+	fprintf(fp, "\t PRIMER_WT_GC_PERCENT_GT : %f \n", PWGPG);
+	fprintf(fp, "\t PRIMER_WT_COMPL_ANY : %f \n", PWCA);
+	fprintf(fp, "\t PRIMER_WT_COMPL_END : %f \n", PWCE);
+	fprintf(fp, "\t PRIMER_WT_NUM_NS : %f \n", PWNNS);
+	fprintf(fp, "\t PRIMER_WT_REP_SIM : %f \n", PWRS);
+	fprintf(fp, "\t PRIMER_WT_SEQ_QUAL : %f \n", PWSQ);
+	fprintf(fp, "\t PRIMER_WT_END_QUAL : %f \n", PWEQ);
+	fprintf(fp, "\t PRIMER_WT_POS_PENALTY : %f \n", PWPP);
+	fprintf(fp, "\t PRIMER_WT_END_STABILITY : %f \n", PWES);
+	fprintf(fp, "\t PRIMER_PAIR_WT_PR_PENALTY : %f \n", PPWPP);
+	fprintf(fp, "\t PRIMER_PAIR_WT_DIFF_TM : %f \n", PPWDTM);
+	fprintf(fp, "\t PRIMER_PAIR_WT_COMPL_ANY : %f \n", PPWCA);
+	fprintf(fp, "\t PRIMER_PAIR_WT_COMPL_END : %f \n", PPWCE);
+	fprintf(fp, "\t PRIMER_PAIR_WT_PRODUCT_TM_LT : %f \n", PPWPTL);
+	fprintf(fp, "\t PRIMER_PAIR_WT_PRODUCT_TM_GT : %f \n", PPWPTG);
+	fprintf(fp, "\t PRIMER_PAIR_WT_PRODUCT_SIZE_LT : %f \n", PPWPSL);
+	fprintf(fp, "\t PRIMER_PAIR_WT_PRODUCT_SIZE_GT : %f \n", PPWPSG);
+	fprintf(fp, "\t PRIMER_PAIR_WT_REP_SIM : %f \n", PPWRS);
 
 	fprintf(fp, "___________________________________________________\n");
 	fclose(fp);
-
-    /*
-    printf("%s mblast command %60s\n", T_S(), blast);
-    printf("%s formatdb command %60s\n", T_S(), formatdb);
-    printf("%s primer3 command %s\n", T_S(), primer3);
-    printf("%s primegens env_path %s\n", T_S(), env_path);
-    printf("%s virtual database filename: %s\n",T_S(),fn_vdb);
-    printf("%s primer3 input filename: %s\n",T_S(),fn_p3in);
-    printf("%s primer3 output filename: %s\n",T_S(),fn_p3out);
-    printf("%s unique oligo list filename: %s\n",T_S(),fn_uoligo);
-    printf("%s blast intput filename: %s\n", T_S(), fn_bin);
-    printf("%s blast output filename: %s\n", T_S(), fn_bout);
-    */
 
 	/*Primer3 parameters*/
     printf("\n\n");
@@ -1670,7 +1657,3 @@ short read_dbl_test(char *fn) {
     }
 	return PASS;
 }
-
-/************************* END ***********************************/
-
-

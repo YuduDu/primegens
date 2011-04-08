@@ -1,4 +1,3 @@
-
 /*this module will generate the blast hit record and potential 
  * amplicons for each primer pair for any query sequence.
  */
@@ -95,11 +94,6 @@ int ppair_chit_record_chromosome(void) {
 		if(uo==uoligo_count)
 			p_exit("right primer not in uoligo list?\n");
 		
-		/*
-		printf("%s description of tbrc1 and tbrc2 records...\n",T_S());
-		for(c=0; c < BLASTRECORDS; c++) {
-		}*/
-
 		/* make sure tbrc1 matchs tbrc2 */
 		for(c=0; c < BLASTRECORDS; c++) {
 			if(dlevel >3){

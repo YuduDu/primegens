@@ -237,8 +237,6 @@ short fspd_loop(void) {
                     free(ppair[pp].chit);
             }
         } else if(DATABASE_TYPE==2) {
-        		/* REMOVE? */
-            //res = chk_hybridization_multiple(q);      /*qinfo is required*/
             if(res==FAIL)
                 p_exit("problem inside chk_hybirization function\n");
         } else if(DATABASE_TYPE==3) {
@@ -288,4 +286,3 @@ short fspd_loop(void) {
 	
 	return PASS;
 }
-
