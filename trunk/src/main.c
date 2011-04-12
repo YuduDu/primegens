@@ -1,6 +1,7 @@
 
 /* header files*/
 
+#include <unistd.h>
 #include "lib.h"
 #include "defs.h"
 #include "input.h"
@@ -36,11 +37,20 @@ int main(int argc, char *argv[]) {
 
 	ptr = (char *)getenv(PATHVAR);
 	if(!ptr) { 
-		printf("Environment variable \"%s\" value is %s\n", PATHVAR, ptr);	
-		fprintf(stderr, pmsg);
-		p_exit("environment path not defined\n");
+		/* get the parent directory */
+		chdir("..");
+		char cwd[1024];
+		if (getcwd(cwd, sizeof(cwd)) != NULL)
+			fprintf(stdout, "Environment Variable for path not defined, using current parent dir: %s\n", cwd);
+		else
+			p_exit("getcwd() error");
+		strcpy(env_path, cwd);
+		/* move back into the bin */
+		chdir("bin");
 	}
-	strcpy(env_path, ptr);
+	else {
+		strcpy(env_path, ptr);
+	}
 	pid = getpid();
 	ptr = (char *)getenv(TMPDIRPATHVAR);
 	if(!ptr) { 
