@@ -49,11 +49,11 @@ ifeq ($(TESTOPTS),--windows)
 	OLIGOTM_EXE	= p3_oligotm.exe
 	LONG_SEQ_EXE	= p3_long_seq_tm_test.exe
 else
-	PRIMER_EXE      = p3_primer3_core
-	NTDPAL_EXE	= p3_ntdpal
-	NTTHAL_EXE	= p3_ntthal
-	OLIGOTM_EXE	= p3_oligotm
-	LONG_SEQ_EXE	= p3_long_seq_tm_test
+	PRIMER_EXE  = ../primer3/p3_primer3_core
+	NTDPAL_EXE	= ../primer3/p3_ntdpal
+	NTTHAL_EXE	= ../primer3/p3_ntthal
+	OLIGOTM_EXE	= ../primer3/p3_oligotm
+	LONG_SEQ_EXE	= ../primer3/p3_long_seq_tm_test
 endif
 LIBOLIGOTM      = p3_liboligotm.a
 LIBOLIGOTM_DYN  = p3_liboligotm.so.1.2.0
@@ -79,7 +79,7 @@ example_files=example.for example.rev example.int
 
 #PRIMER3 END
 
-PRIMEGENS_EXE		= primegens.exe
+PRIMEGENS_EXE		= ../bin/primegens.exe
 
     
 PRIMEGENS_OBJECTS	= main.o \
